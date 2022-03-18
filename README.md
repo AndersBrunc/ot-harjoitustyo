@@ -1,4 +1,4 @@
-## **Tämä on _otsikko_**
+## **Tehtävät**
 ### Viikko 1
 
 [gitlog.txt](laskarit/viikko1/gitlog.txt)
