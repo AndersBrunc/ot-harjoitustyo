@@ -1,0 +1,32 @@
+commit f77d8e96958b9b5335c5b920d9551fe1af09ae31
+Author: Andreas Bruncrona <andreas.bruncrona@helsinki.fi>
+Date:   Wed Mar 16 19:36:40 2022 +0200
+
+    viimeiset muutokset
+
+ tiedostoja/file1.txt                 | 1 -
+ tiedostoja/{file2.txt => file22.txt} | 0
+ 2 files changed, 1 deletion(-)
+
+commit a511b1b72b0169dcd3ba28147b9df6942c7cb3ae
+Author: Andreas Bruncrona <andreas.bruncrona@helsinki.fi>
+Date:   Wed Mar 16 19:30:20 2022 +0200
+
+    muutokset
+
+ tiedostoja/file1.txt | 1 +
+ tiedostoja/file2.txt | 1 +
+ tiedostoja/file3.txt | 1 +
+ 3 files changed, 3 insertions(+)
+
+commit be4ebf55e177117587a5558a2b80e7e1285023ad
+Author: Andreas Bruncrona <andreas.bruncrona@helsinki.fi>
+Date:   Wed Mar 16 19:28:32 2022 +0200
+
+    created files
+
+ tiedostoja/file1.txt | 0
+ tiedostoja/file2.txt | 0
+ tiedostoja/file3.txt | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
