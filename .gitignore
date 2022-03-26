@@ -1,2 +1,4 @@
 .pytest_cahce
 __pycache__
+.coverage
+htmlcov
