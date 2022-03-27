@@ -5,7 +5,11 @@
 
 [komentorivi.txt](laskarit/viikko1/komentorivi.txt)
 
+#### Harjoitustyo 1 ja 2
+
 [vaatimusmaarittely.md](documentation/vaatimusmaarittely.md)
+
+[tuntikirjanpito.md](documentation/tuntikirjanpito.md)
 
 ### Viikko 2
 
