@@ -7,8 +7,8 @@ The application allows for the user to keep track of there income and spendings,
 ## Functions
 
 - User can add sources of income
-- User can input purchases ,sort them by category and add comments to them
-- User can see their spendings and earnings graphicly (pie chart or histogram)
+- User can input purchases, sort them by category and add comments to them
+- User can see their spendings and earnings graphically (pie chart or histogram)
 - User can get se their average spending each month and week
 - User can see how much they saved or lost each month/week
 
