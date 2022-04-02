@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The application allows for the user to keep track of there income and spendings, which leads to awareness and better choices.
+The application allows for the user to keep track of their income and spendings, which leads to awareness and better choices.
 
 ## Functions
 
