@@ -2,22 +2,26 @@
 
 ## Purpose
 
-The application allows for the user to keep track of their income and spendings, which leads to awareness and better choices.
+The application allows for the user to keep track of how much they can afford to spend each month, which helps them to become more aware of their purchases and choices.
 
-## Functions
+## Base Functions
 
-- User can add sources of income
-- User can input purchases, sort them by category and add comments to them
-- User can see their spendings and earnings graphically (pie chart or histogram)
-- User can get se their average spending each month and week
-- User can see how much they saved or lost each month/week
+- User can create an account by filling in some infromation:
+  - username
+  - password
+  - balance currently
+  - monthly income (can be edited later)
+  - monthly recurring payments such as rent (can be edited later)
+- User can log in to their account
+- User can create a monthly budget, which is then displayed on the home screen along with the user's total balance
+- User can input purchases, which decreases the budget amount displayed
+- The budget auto resets each at the end of the month and the data of the result of the previous month is saved
+- History can be viewed
 
 ## Possible future extensions
 
-- Food purchases:
-  - Can be rated
-  - Cost and benefit analysis nutritionally
-- User can add goal to save towoards and see the progression
-- User can add recurring payments
+- Previous results can be presented and compared graphically
+- A saving goal can be created
+
 
 
