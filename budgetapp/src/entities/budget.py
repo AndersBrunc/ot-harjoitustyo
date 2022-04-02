@@ -18,7 +18,6 @@ class Budget:
             user: User-object, represents the user
             name: string, represents name of the budget
             original_amount: float, represents the original budget amount 
-            left_amount: float, represents the amount that is still left in the budget
 
         '''
        
