@@ -19,6 +19,4 @@
 
 [tehtava_1](laskarit/viikko3/monopoly_teh1.png)
 
-## Harjoitustyö
 
-[budgetapp](https://github.com/AndersBrunc/ot-harjoitustyo/edit/master/laskarit/budgetapp)
