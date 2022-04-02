@@ -21,4 +21,4 @@
 
 ## Harjoitustyö
 
-[budgetapp](laskarit/budgetapp)
+[budgetapp](https://github.com/AndersBrunc/ot-harjoitustyo/edit/master/laskarit/budgetapp)
