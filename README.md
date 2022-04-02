@@ -7,9 +7,9 @@
 
 #### Harjoitustyo 1 ja 2
 
-[vaatimusmaarittely.md](laskarit/budgetapp/documentation/vaatimusmaarittely.md)
+[vaatimusmaarittely.md](laskarit/documentation/vaatimusmaarittely.md)
 
-[tuntikirjanpito.md](laskarit/budgetapp/documentation/tuntikirjanpito.md)
+[tuntikirjanpito.md](laskarit/documentation/tuntikirjanpito.md)
 
 ### Viikko 2
 
@@ -21,4 +21,4 @@
 
 ## Harjoitustyö
 
-[budgetapp](laskarit/budgetapp)
+[budgetapp](https://github.com/AndersBrunc/ot-harjoitustyo/edit/master/laskarit/budgetapp)
