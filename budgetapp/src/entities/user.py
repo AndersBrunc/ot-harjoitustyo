@@ -1,5 +1,5 @@
 class User:
-   '''Class that represents the user
+    '''Class that represents the user
 
     Attributes:
         username: string , represents the users username
@@ -8,7 +8,6 @@ class User:
         income: float , represents the users current monthly income
         expenses: float , represents the users monthly recurring expenses
     '''
-    
     def __init__(self,username=str,password=str,balance=float,income=float,expenses=float):
         '''Class constructor, makes new user.
 

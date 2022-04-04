@@ -10,7 +10,7 @@ class Budget:
 
     '''
 
-    def __init__(self,user,name=str,orignal_amount=float):
+    def __init__(self,user,name=str,original_amount=float):
        
         '''Class construcor, makes a new budget.
     

@@ -7,7 +7,9 @@ class BudgetappService:
     def __init__(self):
         '''The constructor of the class, creates a new service session'''
 
-        self._user = None
+        self.user = None
+        self.budget = None
+
 
     def create_budget(self,user,name,amount):
         '''Creates a budget
@@ -20,16 +22,21 @@ class BudgetappService:
         Returns:
             budget as Budget-object
         '''
+        self.budget=Budget(user,name,amount)
+        
+        
 
-
-    def create_user(self,username,password):
+    def create_user(self,username,password,balance,income,expenses):
         '''Creates a new user
         
         Args: 
             username: string, represents the user's username
             password: represents the user's password
-
+            balance: float , represents the users current balance
+            income: float , represents the users current monthly income
+            expenses: float , represents the users monthly recurring expenses
         '''
+        self.user=User(username,password,balance,income,expenses)
 
 
     def login(self, username=str, password=str):
@@ -43,4 +50,16 @@ class BudgetappService:
             user as User-object
         '''
 
-    
+    def add_purchase(self,budget,amount,category,comment):
+        '''Adds the users purchase to repository of purchases, and
+           removes the receipt amount from the budget
+
+        Args:
+            budget: Budget-object, represents the budget that will be operated on
+            amout: float, represents the receipt amount
+            category: string, represents the purchased item(s) category
+            comment:
+                optinal, defaults to empty string "".
+                string, represents the users comment on the purchase
+        '''
+        self.budget.left_amount-=amount
