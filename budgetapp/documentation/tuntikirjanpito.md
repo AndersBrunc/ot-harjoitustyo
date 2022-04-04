@@ -4,4 +4,5 @@
 | :---: | :-----| :-----|
 | 27.3 | 1     | brainstorming |
 | 2.4 | 12     | planning,started writing code,more brainstorming |
-| tot | 13     | |
+| 4.4 | 5      | coding, testing |
+| tot | 17     | |
