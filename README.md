@@ -1,22 +1,15 @@
-## **Laskarit**
-### Viikko 1
+# **BudgetApp**
 
-[gitlog.txt](viikko1/gitlog.txt)
+This app can be used to create a budget.
 
-[komentorivi.txt](viikko1/komentorivi.txt)
+## Documentation
 
-#### Harjoitustyo 1 ja 2
+- [Specification of Requirements](budgetapp/documentation/vaatimusmaarittely.md)
 
-[vaatimusmaarittely.md](budgetapp/documentation/vaatimusmaarittely.md)
+- [Work accounting](budgetapp/documentation/tuntikirjanpito.md)
 
-[tuntikirjanpito.md](budgetapp/documentation/tuntikirjanpito.md)
+- [Changelog](budgetapp/documentation/changelog.md)
 
-### Viikko 2
 
-[coverage_report](viikko2/coverage_report.png)
-
-### Viikko 3
-
-[monopoly_tehtava_1](viikko3/monopoly_teh1.png)
 
 
