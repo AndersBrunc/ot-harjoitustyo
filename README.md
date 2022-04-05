@@ -1,9 +1,9 @@
-## **Tehtävät**
+## **Laskarit**
 ### Viikko 1
 
-[gitlog.txt](laskarit/viikko1/gitlog.txt)
+[gitlog.txt](viikko1/gitlog.txt)
 
-[komentorivi.txt](laskarit/viikko1/komentorivi.txt)
+[komentorivi.txt](viikko1/komentorivi.txt)
 
 #### Harjoitustyo 1 ja 2
 
@@ -13,10 +13,10 @@
 
 ### Viikko 2
 
-[coverage_report](laskarit/viikko2/coverage_report.png)
+[coverage_report](viikko2/coverage_report.png)
 
 ### Viikko 3
 
-[tehtava_1](laskarit/viikko3/monopoly_teh1.png)
+[monopoly_tehtava_1](viikko3/monopoly_teh1.png)
 
 
