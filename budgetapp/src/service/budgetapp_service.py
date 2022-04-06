@@ -1,5 +1,6 @@
 from entities.budget import Budget
 from entities.user import User
+from entities.purchase import Purchase
 
 class BudgetappService:
     '''The class of the application service'''
@@ -8,7 +9,7 @@ class BudgetappService:
         '''The constructor of the class, creates a new service session'''
 
         self.user = None
-        self.budget = None
+        
 
 
     def create_budget(self,user,name,amount):
@@ -32,17 +33,7 @@ class BudgetappService:
         Args: 
             username: string, represents the user's username
             password: represents the user's password
-            balance: float , represents the users current balance
-            income: float , represents the users current monthly income
-            expenses: float , represents the users monthly recurring expenses
-        '''
-        self.user=User(username,password,balance,income,expenses)
-
-
-    def login(self, username=str, password=str):
-        '''Logs the user in 
-        
-        Args:
+             ei merkitä laskareihin käytettyä aikaa:
             username: string, represents the user's username
             password: string, represents the user's password
         
@@ -62,4 +53,6 @@ class BudgetappService:
                 optinal, defaults to empty string "".
                 string, represents the users comment on the purchase
         '''
+        purchase = Purchase(amount,category,comment)
+
         self.budget.left_amount-=amount
