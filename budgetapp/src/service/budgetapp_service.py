@@ -39,7 +39,13 @@ class BudgetappService:
         
         Returns:
             user as User-object
+
         '''
+        user=User(username,password,balance,income,expenses)
+        self.user=user
+        return user
+
+        
 
     def add_purchase(self,budget,amount,category,comment):
         '''Adds the users purchase to repository of purchases, and

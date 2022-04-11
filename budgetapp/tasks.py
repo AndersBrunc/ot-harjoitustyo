@@ -2,7 +2,7 @@ from invoke import task
 
 @task
 def start(ctx):
-    ctx.run('python3 src/service/budgetapp_service.py', pty=True)
+    ctx.run("python3 src/index.py", pty=True)
 
 @task
 def coverage(ctx):

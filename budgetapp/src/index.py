@@ -1,8 +1,8 @@
-from service.budgetapp_sevice import BudgetappService
+from service.budgetapp_service import BudgetappService
 
 def main():
     app=BudgetappService()
 
 if __name__ =='__main__':
     main()
-    
+    print('jee tämä toimii')
