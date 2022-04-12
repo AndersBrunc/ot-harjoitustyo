@@ -81,5 +81,4 @@ class BudgetRepository:
         '''
         self._write([])
 
-
 budget_repository = BudgetRepository(BUDGET_FILE_PATH)
