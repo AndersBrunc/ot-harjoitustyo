@@ -1,12 +1,17 @@
 ## Week 3
-- basic functions
-- basic tests
+- added basic functions
+- added basic tests
 
 ## Week 4
-- databases
-- main functions coded and tested
+- added databases
+- tried to fix errors
 
 ## Week 5
-- polishing and testing
+- fix errors
+- write all main functions
+- tests
 - UI
 
+## Week 6
+- docstring
+- polishing and more testing
