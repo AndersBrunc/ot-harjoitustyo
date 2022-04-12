@@ -6,7 +6,7 @@ This app can be used to create a budget.
 
 - [Specification of Requirements](budgetapp/documentation/vaatimusmaarittely.md)
 
-- [Architecture](budgetapp/documentation/arkkitektuuri.md)
+- [Architecture](budgetapp/documentation/arkkitehtuuri.md)
 
 - [Work accounting](budgetapp/documentation/tuntikirjanpito.md)
 
