@@ -1,5 +1,6 @@
 import uuid
 
+
 class Purchase:
     '''Class for purchases
 
@@ -12,7 +13,8 @@ class Purchase:
                 optinal, defaults to empty string "".
                 string, represents the users comment on the purchase
     '''
-    def __init__(self,p_id=None,product,category,amount,comment):
+
+    def __init__(self, p_id=None, product, category, amount, comment):
         '''Class constructor, creates a purchase
 
         Args:

@@ -8,7 +8,8 @@ class User:
         income: float , represents the users current monthly income
         expenses: float , represents the users monthly recurring expenses
     '''
-    def __init__(self,username,password,balance,income,expenses):
+
+    def __init__(self, username, password, balance, income, expenses):
         '''Class constructor, makes new user.
 
         Args:
@@ -19,7 +20,7 @@ class User:
             expenses: float , represents the users monthly recurring expenses
 
         '''
-       
+
         self.username = username
         self.password = password
         self.balance = balance
