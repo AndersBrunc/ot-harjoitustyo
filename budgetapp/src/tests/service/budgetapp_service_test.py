@@ -7,7 +7,7 @@ class TestBudgetappService(unittest.TestCase):
     def setUp(self):
         self.budget_service = BudgetappService()
         self.testuser = User('MrTest','test123',1000.0,500.0,100.0)
-        self.testbudget = Budget('MrTest','MayBudget',300.0)
+        self.testbudget = Budget(1,'MrTest','MayBudget',300.0,300.0)
 
 
     def test_create_user(self):
