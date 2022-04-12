@@ -1,3 +1,7 @@
+# Architecture
+
+![rakenne](./pictures/rakenne.png)
+
 ## Application Logic
 
 ![Architecture1](./pictures/loogisen_tietomalli.png)
