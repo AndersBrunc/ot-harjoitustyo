@@ -22,7 +22,7 @@ def create_tables(connection):
 
 def initialize_db():
 
-    connection = get_database_conncetion()
+    connection = get_database_connection()
 
     drop_tables(connection)
 
