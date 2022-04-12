@@ -1,7 +1,7 @@
-from init_database import initialize_database
+from init_database import initialize_db
 
 def build():
-    initialize_database()
+    initialize_db()
 
 if __name__=='__main__':
     build()
