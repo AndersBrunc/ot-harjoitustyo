@@ -41,7 +41,7 @@ class PurchaseRepository:
                 user = row_piece[4]
                 comment = row_piece[5]
                 purchases.append(
-                    Purchase(p_id, product, category, amount, user, comment))
+                    Purchase(product, category, amount, user, comment, p_id))
 
             return purchases
 

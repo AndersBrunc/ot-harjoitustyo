@@ -41,7 +41,7 @@ class BudgetRepository:
                 left_amount = row_piece[4]
 
                 budgets.append(
-                    Budget(b_id, user, name, og_amount, left_amount))
+                    Budget(user, name, og_amount, left_amount, b_id))
 
             return budgets
 
