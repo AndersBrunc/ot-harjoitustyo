@@ -10,6 +10,15 @@ def create_tables(connection):
 
     cursor = connection.cursor()
     cursor.execute('''
+        create table users (
+            username text primary key,
+            password text,
+            balance float,
+            income float,
+            expenses float
+        );
+    ''')
+    cursor.execute('''
         create table budgets (
             name text primary key,
             user text,
