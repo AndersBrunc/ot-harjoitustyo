@@ -3,7 +3,7 @@ from databases.budget_repository import budget_repository
 from entities.budget import Budget
 from entities.user import User
 
-class TestBudgetRepository(unittest.Testcase):
+class TestBudgetRepository(unittest.TestCase):
     def setUp(self):
         budget_repository.delete_all()
 
