@@ -22,7 +22,7 @@ class BudgetRepository:
 
         with open(self._path, 'w', encoding='utf-8') as file:
             for budget in budgets:
-                row = f'{budget.id}{budget.user};{budget.name};{budget.og_amount};{budget.c_amount}'
+                row = f'{budget.id}{budget.name};{budget.user};{budget.og_amount};{budget.c_amount}'
                 file.write(row+'\n')
 
     def _read(self):
@@ -35,13 +35,13 @@ class BudgetRepository:
                 row_piece = row.split(';')
 
                 b_id = row_piece[0]
-                user = row_piece[1]
-                name = row_piece[2]
+                name = row_piece[1]
+                user = row_piece[2]
                 og_amount = row_piece[3]
                 left_amount = row_piece[4]
 
                 budgets.append(
-                    Budget(user, name, og_amount, left_amount, b_id))
+                    Budget(name, user, og_amount, left_amount, b_id))
 
             return budgets
 
@@ -62,7 +62,7 @@ class BudgetRepository:
         all_budgets.append(budget)
         self._write(all_budgets)
 
-        return True
+        return budget
 
     def delete_one(self, p_id):
         '''Deletes specific budget

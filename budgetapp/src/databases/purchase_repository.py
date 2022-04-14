@@ -22,7 +22,7 @@ class PurchaseRepository:
 
         with open(self._path, 'w', encoding='utf-8') as file:
             for purchase in purchases:
-                row = f'{purchase.product};{purchase.category};{purchase.amount};{purchase.user}'
+                row = f'{purchase.id};{purchase.category};{purchase.amount};{purchase.user};{purchase.comment}'
                 file.write(row+'\n')
 
     def _read(self):
@@ -35,13 +35,12 @@ class PurchaseRepository:
                 row_piece = row.split(';')
 
                 p_id = row_piece[0]
-                product = row_piece[1]
-                category = row_piece[2]
-                amount = row_piece[3]
-                user = row_piece[4]
-                comment = row_piece[5]
+                category = row_piece[1]
+                amount = row_piece[2]
+                user = row_piece[3]
+                comment = row_piece[4]
                 purchases.append(
-                    Purchase(product, category, amount, user, comment, p_id))
+                    Purchase(category, amount, user, comment, p_id))
 
             return purchases
 
