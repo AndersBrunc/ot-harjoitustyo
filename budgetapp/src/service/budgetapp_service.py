@@ -81,22 +81,24 @@ class BudgetappService:
 
         return user
 
-    def add_purchase(self, budget, product, amount, category, comment):
+    def add_purchase(self, budget_id, amount, category, comment):
         '''Adds the users purchase to repository of purchases, and
-           removes the receipt amount from the budget
+           removes the receipt amount from the budget and balance of user
 
         Args:
-            budget: Budget-object, represents the budget that will be operated on
-            product:
+            budget_id: Budget-id, represents the id of the budget that will be operated on
             amount: float, represents the receipt amount
             category: string, represents the purchased item(s) category
             comment:
                 optinal, defaults to empty string "".
                 string, represents the users comment on the purchase
         '''
-        purchase = Purchase(product, category, amount, comment)
+        purchase = self._purchase_repository.add_purchase(
+            Purchase(category, amount, self._user, comment)
+        )
 
-        self.budget.left_amount -= amount
+        self._budget_repository.remove_amount(amount, budget_id)
+        self._user.balance -= amount
 
     def login(self, username, password):
         '''Logs user in
