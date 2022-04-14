@@ -8,15 +8,18 @@ from databases.purchase_repository import (
 from databases.budget_repository import (
     budget_repository as default_budget_repository
 )
-from databases.user_repository import (
+from databases.users_repository import (
     user_repository as default_user_repository
 )
+
 
 class UsernameTakenError(Exception):
     pass
 
+
 class InvalidCredentialsError(Exception):
     pass
+
 
 class BudgetappService:
     '''The class of the application service'''
@@ -34,7 +37,6 @@ class BudgetappService:
         self._budget_repository
         self._user_repository
 
-
     def create_budget(self, name, amount):
         '''Creates a budget
 
@@ -46,7 +48,8 @@ class BudgetappService:
         Returns:
             budget as Budget-object
         '''
-        budget = Budget(name=name, user=_user, og_amount=amount, c_amount=amount)
+        budget = Budget(name=name, user=_user,
+                        og_amount=amount, c_amount=amount)
 
         return self._budget_repository.add_budget(budget)
 
@@ -60,10 +63,10 @@ class BudgetappService:
             balance: float , represents the users current balance
             income: float , represents the users current monthly income
             expenses: float , represents the users monthly recurring expenses
-           
+
         Returns:
             user as User-object
-        
+
         '''
         is_username_taken = self._user_repository.find_by_username(username)
 
@@ -74,8 +77,8 @@ class BudgetappService:
             User(username, password, balance, income, expenses)
         )
         if login:
-            self._user=user
-            
+            self._user = user
+
         return user
 
     def add_purchase(self, budget, product, amount, category, comment):
@@ -97,14 +100,14 @@ class BudgetappService:
 
     def login(self, username, password):
         '''Logs user in
-        
+
         Args:
             username: string, represents users username
             password: string, represents users password
 
         Returns:
             User as User-object
-        
+
         Raises:
             InvalidCredentialsError:
                 Error raised if entered username and password are falsely paired
@@ -112,22 +115,24 @@ class BudgetappService:
         user = self._user_repository.find_by_username(username)
 
         if user.password != password or not user:
-            raise InvalidCredentialsError('Invalid username or password entered')
+            raise InvalidCredentialsError(
+                'Invalid username or password entered')
 
         self._user = user
         return user
 
     def current_user(self):
         '''Shows the current user
-        
+
         Returns:
             User-object of current user
         '''
         return self._user
-    
+
     def logout(self):
         '''Logs user out
         '''
         self._user = None
+
 
 budgetapp_service = BudgetappService()

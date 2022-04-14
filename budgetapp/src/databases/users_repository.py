@@ -1,15 +1,18 @@
-from entities import User
+from entities.user import User
 from db_connection import get_database_connection
 
+
 def get_user_by_row(row):
-    return User(row['username'],row['password'],row['balance'],row['income'],row['expenses']) if row else None
+    return (User(row['username'], row['password'],
+        row['balance'], row['income'], row['expenses']) if row else None)
 
 class UserRepository:
     '''The class of the user-database
     '''
-    def __init__(self,connection):
+
+    def __init__(self, connection):
         '''class constructor
-        
+
         Args:
             connection: database connection object
 
@@ -18,7 +21,7 @@ class UserRepository:
 
     def create_user(self, user):
         '''Adds user to the database
-        
+
         Args:
             user: the user to be added
 
@@ -26,7 +29,7 @@ class UserRepository:
             The added user as User object
 
         '''
-        cursor=self._connection.cursor()
+        cursor = self._connection.cursor()
         cursor.execute(
             'inser into users (username,password,balance,income,expenses) values (?,?,?,?,?)',
             (user.username, user.password, user.balance, user.income, user.expenses)
@@ -46,7 +49,7 @@ class UserRepository:
 
         return list(map(get_user_by_row, rows))
 
-    def find_by_username(self,username):
+    def find_by_username(self, username):
         '''Finds user based on username
 
         Args:
@@ -57,7 +60,7 @@ class UserRepository:
 
         '''
         cursor = self._connection.cursor()
-        cursor.execute('select * from users where username = ?',(username))
+        cursor.execute('select * from users where username = ?', (username))
         row = cursor.fetchone()
 
         return get_user_by_row(row)
@@ -69,4 +72,5 @@ class UserRepository:
         cursor.execute('delete from users')
         self._connection.commit()
 
-user_repository= UserRepository(get_database_connection())
+
+user_repository = UserRepository(get_database_connection())
