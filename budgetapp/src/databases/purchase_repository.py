@@ -82,22 +82,23 @@ class PurchaseRepository:
         self._write([])
 
     def find_by_username(self, username):
-        
+
         purchases = self.fetch_all()
 
         user_purchases = filter(
-            lambda purchase: purchase.user and 
+            lambda purchase: purchase.user and
             purchase.user.username == username, purchases
         )
         return list(user_purchases)
 
-    def find_by_category(self, category, username)
+    def find_by_category(self, category, username):
 
         user_purchases = self.find_by_username(username)
-        categorized =  filter(
+        categorized = filter(
             lambda purchase: purchase.category and
             purchase.category == category, user_purchases
         )
         return list(categorized)
+
 
 purchase_repository = PurchaseRepository(PURCHASE_FILE_PATH)

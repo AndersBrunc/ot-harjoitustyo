@@ -82,11 +82,11 @@ class BudgetRepository:
         self._write([])
 
     def find_by_username(self, username):
-        
+
         budgets = self.fetch_all()
 
         user_budgets = filter(
-            lambda budget: budget.user and 
+            lambda budget: budget.user and
             budget.user.username == username, budgets
         )
         return list(user_budgets)
@@ -98,5 +98,6 @@ class BudgetRepository:
                 budget.c_amount -= amount
                 break
         self._write(budgets)
+
 
 budget_repository = BudgetRepository(BUDGET_FILE_PATH)

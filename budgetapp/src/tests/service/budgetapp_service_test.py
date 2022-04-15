@@ -3,6 +3,12 @@ from entities.budget import Budget
 from entities.user import User
 from service.budgetapp_service import BudgetappService
 
+# User(username, password, balance,income, expenses)
+# Budget(name, user, og_amount, c_amount, b_id)
+# Purchase(category, amount, user, comment, p_id)
+
+
+
 
 class TestBudgetappService(unittest.TestCase):
     def setUp(self):
@@ -13,7 +19,7 @@ class TestBudgetappService(unittest.TestCase):
     def test_create_user(self):
         self.budget_service.create_user(
             'MrTest', 'test123', 1000.0, 500.0, 100.0)
-        self.assertNotEqual(self.budget_service.user, None)
+        self.assertNotEqual(self.budget_service._user, None)
 
     def test_create_budget(self):
         self.budget_service.create_budget('MrTest', 'MayBudget', 200.0)

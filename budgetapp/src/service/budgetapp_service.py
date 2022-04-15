@@ -33,9 +33,9 @@ class BudgetappService:
         '''The constructor of the class, creates a new service session'''
 
         self._user = None
-        self._purchase_repository
-        self._budget_repository
-        self._user_repository
+        self._purchase_repository = purchase_repository
+        self._budget_repository = budget_repository
+        self._user_repository = user_repository
 
     def create_budget(self, name, amount):
         '''Creates a budget
