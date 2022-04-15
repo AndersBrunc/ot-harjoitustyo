@@ -9,4 +9,5 @@
 | 12.4| 12   | wrote database code, added pylint, tried fixing errors |
 | 13.4| 3    | wrote more database code, made some changes to other files |
 | 14.4| 3    | wrote some service code, started familiarizing with TkInter|
+| 15.4| 5    | familiarized more with TkInter, wrote some ui code|
 | tot | 39   | |
