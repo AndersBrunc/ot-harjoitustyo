@@ -48,7 +48,7 @@ class BudgetappService:
         Returns:
             budget as Budget-object
         '''
-        budget = Budget(name=name, user=_user,
+        budget = Budget(name=name, user=self._user,
                         og_amount=amount, c_amount=amount)
 
         return self._budget_repository.add_budget(budget)

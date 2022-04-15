@@ -17,6 +17,8 @@ class CreateUserView:
         self._error_label = None
         self._frame = None
 
+        self._initialize()
+
     def pack(self):
         self._frame.pack(fill=constants.X)
 
@@ -28,28 +30,28 @@ class CreateUserView:
         self._username_input = ttk.Entry(master=self._frame)
 
         label.grid(padx=10, pady=10, sticky=constants.W)
-        self._username_input(padx=5, pady=10, sticky=constants.EW)
+        self._username_input.grid(padx=5, pady=10, sticky=constants.EW)
 
     def _initialize_password_field(self):
         label = ttk.Label(master=self._frame, text='Password')
         self._password_input = ttk.Entry(master=self._frame)
 
         label.grid(padx=10, pady=10, sticky=constants.W)
-        self._password_input(padx=5, pady=10, sticky=constants.EW)
+        self._password_input.grid(padx=5, pady=10, sticky=constants.EW)
 
     def _initialize_balance_field(self):
         label = ttk.Label(master=self._frame, text='Balance (€)')
         self._balance_input = ttk.Entry(master=self._frame)
 
         label.grid(padx=10, pady=10, sticky=constants.W)
-        self._balance_input(padx=5, pady=10, sticky=constants.EW)
+        self._balance_input.grid(padx=5, pady=10, sticky=constants.EW)
 
     def _initialize_income_field(self):
         label = ttk.Label(master=self._frame, text='Monthly Income (€)')
         self._income_input = ttk.Entry(master=self._frame)
 
         label.grid(padx=10, pady=10, sticky=constants.W)
-        self._income_input(padx=5, pady=10, sticky=constants.EW)
+        self._income_input.grid(padx=5, pady=10, sticky=constants.EW)
 
     def _initialize_expenses_field(self):
         label = ttk.Label(master=self._frame,
@@ -57,7 +59,7 @@ class CreateUserView:
         self._expenses_input = ttk.Entry(master=self._frame)
 
         label.grid(padx=10, pady=10, sticky=constants.W)
-        self._income_input(padx=5, pady=10, sticky=constants.EW)
+        self._income_input.grid(padx=5, pady=10, sticky=constants.EW)
 
     def _create_user_handler(self):
         username = self._username_input.get()
@@ -87,7 +89,7 @@ class CreateUserView:
     def _hide_error(self):
         self._error_label.grid_remove()
 
-    def _initalize(self):
+    def _initialize(self):
         self._frame = ttk.Frame(master=self._root)
 
         self._error_variable = StringVar(self._frame)
