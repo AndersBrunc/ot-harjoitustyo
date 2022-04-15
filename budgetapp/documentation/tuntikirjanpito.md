@@ -7,4 +7,6 @@
 | 4.4 | 5    | coding, testing |
 | 6.4 | 3    | familiarizing with database options, coding|
 | 12.4| 12   | wrote database code, added pylint, tried fixing errors |
-| tot | 33   | |
+| 13.4| 3    | wrote more database code, made some changes to other files |
+| 14.4| 3    | wrote some service code, started familiarizing with TkInter|
+| tot | 39   | |
