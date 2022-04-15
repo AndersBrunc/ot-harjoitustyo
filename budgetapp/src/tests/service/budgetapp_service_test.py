@@ -8,8 +8,6 @@ from service.budgetapp_service import BudgetappService
 # Purchase(category, amount, user, comment, p_id)
 
 
-
-
 class TestBudgetappService(unittest.TestCase):
     def setUp(self):
         self.budget_service = BudgetappService()

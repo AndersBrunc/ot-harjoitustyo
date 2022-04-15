@@ -1,8 +1,14 @@
-from service.budgetapp_service import BudgetappService
+from tkinter import Tk
+from ui.ui import UI
 
 
 def main():
-    app = BudgetappService()
+    window = Tk()
+    window.title('BudgetApp')
+
+    ui_view = UI(window)
+    ui_view.start()
+    window.mainloop()
 
 
 if __name__ == '__main__':
