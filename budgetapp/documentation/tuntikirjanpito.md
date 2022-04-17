@@ -11,4 +11,4 @@
 | 14.4| 3    | wrote some service code, started familiarizing with TkInter|
 | 15.4| 5    | familiarized more with TkInter, wrote some ui code|
 | 17.4| 4    | wrote some test code and fixed some ui issues|
-| tot | 44   | |
+| tot | 48   | |
