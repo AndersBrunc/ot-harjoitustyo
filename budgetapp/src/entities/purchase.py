@@ -7,20 +7,20 @@ class Purchase:
     Attributes:
         category: string, represents the purchased item(s) category
         amount: float, represents the receipt amount
-        user: User-object, represnts user
+        username: string, represnts users username
         comment:
                 optinal, defaults to empty string "".
                 string, represents the users comment on the purchase
         p_id: string, represents purchase-id
     '''
 
-    def __init__(self, category, amount, user, comment, p_id=None):
+    def __init__(self, category, amount, username, comment, p_id=None):
         '''Class constructor, creates a purchase
 
         Args:
             category: string, represents the purchased item(s) category
             amount: float, represents the receipt amount
-            user: User-object, represnts user
+            username: string, represnts users username
             comment:
                 optinal, defaults to empty string "".
                 string, represents the users comment on the purchase
@@ -31,5 +31,5 @@ class Purchase:
         self.id = p_id or str(uuid.uuid4())
         self.category = category
         self.amount = amount
-        self.user = user
+        self.username = username
         self.comment = comment

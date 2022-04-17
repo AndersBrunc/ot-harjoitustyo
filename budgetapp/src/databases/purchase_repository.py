@@ -1,55 +1,59 @@
-from pathlib import Path
 from entities.purchase import Purchase
-from config import PURCHASE_FILE_PATH
+from db_connection import get_database_connection
 
+def get_purchase_by_row(self):
+    return Purchase(row['category'], row['amount'], row['user'], row['comment']) if row else None
 
 class PurchaseRepository:
-    '''Class of the purchases
+    '''Class of the purchase-repository
     '''
 
-    def __init__(self, path):
-        '''Class constructor
-            Args:
-            path: path to the location for saving the purchases
+    def __init__(self, connection):
+        '''class constructor
+
+        Args:
+            connection: database connection object
+
         '''
-        self._path = path
-
-    def _check_file_exists(self):
-        Path(self._path).touch()
-
-    def _write(self, purchases):
-        self._check_file_exists()
-
-        with open(self._path, 'w', encoding='utf-8') as file:
-            for purchase in purchases:
-                row = f'{purchase.id};{purchase.category};{purchase.amount};{purchase.user};{purchase.comment}'
-                file.write(row+'\n')
-
-    def _read(self):
-        purchases = []
-        self._check_file_exists()
-
-        with open(self._path, encoding='utf-8') as file:
-            for row in file:
-                row = row.replace('\n', '')
-                row_piece = row.split(';')
-
-                p_id = row_piece[0]
-                category = row_piece[1]
-                amount = row_piece[2]
-                user = row_piece[3]
-                comment = row_piece[4]
-                purchases.append(
-                    Purchase(category, amount, user, comment, p_id))
-
-            return purchases
+        self._connection = connection
 
     def fetch_all(self):
         '''Returns all purchases
         Returns:
             list of Purchase-objects
         '''
-        return self._read()
+        cursor = self._connection.cursor()
+        cursor.execute('select * from purchases')
+        rows = cursor.fetchall()
+
+        return list(map(get_purchase_by_row, rows))
+
+    def find_by_username(self, username):
+        '''Finds purchase based on username
+
+        Args:
+            username: the user the search is based on
+
+        Returns:
+            The list of purchases as Purchase-objects if in existance, otherwhise None
+
+        '''
+        all_purchases = self.fetch_all()
+        new = filter(
+            lambda purchase: purchase and purchase.user.username == username,
+            all_purchases
+        )
+        return list(new)
+        
+    def find_by_category(self, category, username):
+        '''Finds purchase based on category and username
+        '''
+        user_purchases = self.find_by_username(username)
+        categorized = filter(
+            lambda purchase: purchase and purchase.category == category,
+            user_purchases
+        )
+        return list(categorized)
 
     def add_purchase(self, purchase):
         '''Saves a purchase in the purchase-database
@@ -57,9 +61,12 @@ class PurchaseRepository:
             purchase: Purchase-object that will be saved
 
         '''
-        all_purchases = self.fetch_all()
-        all_purchases.append(purchase)
-        self._write(all_purchases)
+        cursor = self._connection.cursor()
+        cursor.execute(
+            'insert into purchases (category,amount,username,comment,p_id) values (?,?,?,?,?)',
+            (purchase.name, purchase.amount, purchase.username, purchase.comment, purchase.id)
+        )
+        self._connection.commit()
 
         return purchase
 
@@ -70,35 +77,16 @@ class PurchaseRepository:
             p_id: id of the deleted purchase
 
         '''
-        self._check_file_exists()
-        all_purchases = self.fetch_all()
-        edited_list = filter(
-            lambda purchase: purchase.id != p_id, all_purchases)
-        self._write(edited_list)
+        cursor = self._connection.cursor()
+        cursor.execute('delete from purchases where p_id = ?', (p_id,))
+        self._connection.commit()
 
     def delete_all(self):
         '''Deletes all purchases
         '''
-        self._write([])
+        cursor = self._connection.cursor()
+        cursor.execute('delete from purchases')
+        self._connection.commit()
 
-    def find_by_username(self, username):
+purchase_repository = PurchaseRepository(get_database_connection())
 
-        purchases = self.fetch_all()
-
-        user_purchases = filter(
-            lambda purchase: purchase.user and
-            purchase.user.username == username, purchases
-        )
-        return list(user_purchases)
-
-    def find_by_category(self, category, username):
-
-        user_purchases = self.find_by_username(username)
-        categorized = filter(
-            lambda purchase: purchase and
-            purchase.category == category, user_purchases
-        )
-        return list(categorized)
-
-
-purchase_repository = PurchaseRepository(PURCHASE_FILE_PATH)

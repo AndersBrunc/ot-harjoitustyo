@@ -100,12 +100,12 @@ class TestBudgetappService(unittest.TestCase):
             FakeUserRepository()
         )
         self.user_testuser = User('Testuser', 'test123', 1000, 500, 200)
-        self.budget_a = Budget('Budget_A', self.user_testuser, 200, 200)
-        self.budget_b = Budget('Budget_A', self.user_testuser, 200, 200)
-        self.purchase_a = Purchase('Food', 10, self.user_testuser, '')
-        self.purchase_b = Purchase('Food', 5.5, self.user_testuser, 'Lidl')
+        self.budget_a = Budget('Budget_A', self.user_testuser.username, 200, 200)
+        self.budget_b = Budget('Budget_A', self.user_testuser.username, 200, 200)
+        self.purchase_a = Purchase('Food', 10, self.user_testuser.username, '')
+        self.purchase_b = Purchase('Food', 5.5, self.user_testuser.username, 'Lidl')
         self.purchase_c = Purchase(
-            'Misc', 88, self.user_testuser, 'random stuff')
+            'Misc', 88, self.user_testuser.username, 'random stuff')
 
     def login_user(self, user):
         self.budgetapp_service.create_user(

@@ -6,6 +6,7 @@ def drop_tables(connection):
     cursor = connection.cursor()
     cursor.execute('''drop table if exists users;''')
     cursor.execute('''drop table if exists budgets;''')
+    cursor.execute('''drop table if exists purchases;''')
     connection.commit()
 
 
@@ -24,9 +25,19 @@ def create_tables(connection):
     cursor.execute('''
         create table budgets (
             name text primary key,
-            user text,
-            original_amount float,
-            current_amount float
+            username text,
+            og_amount float,
+            c_amount float,
+            b_id text
+        );
+    ''')
+    cursor.execute('''
+        create table purchases (
+            category text primary key,
+            amount float,
+            username text,
+            comment text,
+            p_id text
         );
     ''')
 

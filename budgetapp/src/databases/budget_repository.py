@@ -1,103 +1,96 @@
-from pathlib import Path
 from entities.budget import Budget
-from config import BUDGET_FILE_PATH
+from db_connection import get_database_connection
 
+def get_budget_by_row(row):
+    return Budget(row['name'], row['username'], row['og_amount'], row['c_amount']) if row else None
 
 class BudgetRepository:
-    '''Class of the purchases
+    '''Class of the budget-repository
     '''
 
-    def __init__(self, path):
-        '''Class constructor
-            Args:
-            path: path to the location for saving the budgets
+    def __init__(self, connection):
+        '''class constructor
+
+        Args:
+            connection: database connection object
+
         '''
-        self._path = path
+        self._connection = connection
 
-    def _check_file_exists(self):
-        Path(self._path).touch()
+    def add_budget(self, budget):
+        '''Adds budget to the database
 
-    def _write(self, budgets):
-        self._check_file_exists()
+        Args:
+            budget: the budget to be added
 
-        with open(self._path, 'w', encoding='utf-8') as file:
-            for budget in budgets:
-                row = f'{budget.id}{budget.name};{budget.user};{budget.og_amount};{budget.c_amount}'
-                file.write(row+'\n')
+        Returns:
+            The added budget as Budget-object
 
-    def _read(self):
-        budgets = []
-        self._check_file_exists()
+        '''
 
-        with open(self._path, encoding='utf-8') as file:
-            for row in file:
-                row = row.replace('\n', '')
-                row_piece = row.split(';')
+        cursor = self._connection.cursor()
+        cursor.execute(
+            'insert into budgets (name,username,og_amount,c_amount,b_id) values (?,?,?,?,?)',
+            (budget.name, budget.username, budget.og_amount, budget.c_amount, budget.id)
+        )
+        self._connection.commit()
 
-                b_id = row_piece[0]
-                name = row_piece[1]
-                user = row_piece[2]
-                og_amount = row_piece[3]
-                left_amount = row_piece[4]
-
-                budgets.append(
-                    Budget(name, user, og_amount, left_amount, b_id))
-
-            return budgets
+        return budget
 
     def fetch_all(self):
         '''Returns all budgets
         Returns:
             list of Budget-objects
         '''
-        return self._read()
 
-    def add_budget(self, budget):
-        '''Saves a budget in the budget-database
+        cursor = self._connection.cursor()
+        cursor.execute('select * from budgets')
+        rows = cursor.fetchall()
+
+        return list(map(get_budget_by_row, rows))
+
+    def find_by_username(self, username):
+        '''Finds budget based on username
+
         Args:
-            budget: Budget-object that will be saved
+            username: the username the search is based on
+
+        Returns:
+            The list of budgets as Budget-objects if in existance, otherwhise None
 
         '''
         all_budgets = self.fetch_all()
-        all_budgets.append(budget)
-        self._write(all_budgets)
+        new = filter(lambda budget: budget.username == username, all_budgets)
+        return list(new)
 
-        return budget
-
-    def delete_one(self, p_id):
+    def delete_one(self, b_id):
         '''Deletes specific budget
 
         Args:
             b_id: id of the deleted budget
 
         '''
-        self._check_file_exists()
-        all_budgets = self.fetch_all()
-        edited_list = filter(lambda budget: budget.id != p_id, all_budgets)
-        self._write(edited_list)
+        cursor = self._connection.cursor()
+        cursor.execute('delete from budgets where b_id = ?', (b_id,))
+        self._connection.commit()
 
     def delete_all(self):
         '''Deletes all budgets
         '''
-        self._write([])
+        cursor = self._connection.cursor()
+        cursor.execute('delete from budgets')
+        self._connection.commit()
 
-    def find_by_username(self, username):
-
-        budgets = self.fetch_all()
-
-        user_budgets = filter(
-            lambda budget: budget.user and
-            budget.user.username == username, budgets
-        )
-        return list(user_budgets)
-
-    def remove_amount(self, amount, budget_id):
-        budgets = self.fetch_all()
-        for budget in budgets:
-            if budget.id == budget_id:
-                budget.c_amount -= amount
-                break
-        self._write(budgets)
+    def update_current_amount(self, new, b_id):
+        '''Updates the budgets current amount
+        
+        Args:
+            new: the new amount
+            b_id: id of the budget
+        '''
+        cursor = self._connection.cursor()
+        cursor.execute('update budgets set c_amount = ? where b_id = ?', (new, b_id))
+        self._connection.commit()
 
 
-budget_repository = BudgetRepository(BUDGET_FILE_PATH)
+budget_repository = BudgetRepository(get_database_connection())
