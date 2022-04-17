@@ -53,7 +53,6 @@ class BudgetappService:
 
         return self._budget_repository.add_budget(budget)
 
-
     def add_purchase(self, budget_id, amount, category, comment):
         '''Adds the users purchase to repository of purchases, and
            removes the receipt amount from the budget and balance of user
@@ -89,7 +88,7 @@ class BudgetappService:
         '''
         user = self._user_repository.find_by_username(username)
 
-        if user.password != password or not user:
+        if not user or user.password != password:
             raise InvalidCredentialsError(
                 'Invalid username or password entered')
 
@@ -131,6 +130,15 @@ class BudgetappService:
             User-object of current user
         '''
         return self._user
+
+    def fetch_all_users(self):
+        '''Returns all users in the user repository
+
+        Returns:
+            User-objects in a list
+
+        '''
+        return self._user_repository.fetch_all()
 
     def logout(self):
         '''Logs user out

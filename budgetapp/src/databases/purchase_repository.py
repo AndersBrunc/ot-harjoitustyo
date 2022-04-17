@@ -95,7 +95,7 @@ class PurchaseRepository:
 
         user_purchases = self.find_by_username(username)
         categorized = filter(
-            lambda purchase: purchase.category and
+            lambda purchase: purchase and
             purchase.category == category, user_purchases
         )
         return list(categorized)

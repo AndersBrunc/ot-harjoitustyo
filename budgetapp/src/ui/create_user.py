@@ -54,7 +54,8 @@ class CreateUserView:
         self._income_input.grid(padx=5, pady=5, sticky=constants.EW)
 
     def _initialize_expenses_field(self):
-        label = ttk.Label(master=self._frame, text='Monthly Recurring Expenses (€)')
+        label = ttk.Label(master=self._frame,
+                          text='Monthly Recurring Expenses (€)')
         self._expenses_input = ttk.Entry(master=self._frame)
 
         label.grid(padx=5, pady=5, sticky=constants.W)
