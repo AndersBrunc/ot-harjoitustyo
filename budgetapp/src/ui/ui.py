@@ -42,9 +42,9 @@ class UI:
     def _show_create_user_view(self):
         self._hide_current_view()
 
-        self.current_view = CreateUserView(
+        self._current_view = CreateUserView(
             self._root,
             self._show_budget_view,
             self._show_login_view
         )
-        self._curent_view.pack()
+        self._current_view.pack()

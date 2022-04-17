@@ -29,15 +29,15 @@ class CreateUserView:
         label = ttk.Label(master=self._frame, text='Username')
         self._username_input = ttk.Entry(master=self._frame)
 
-        label.grid(padx=10, pady=10, sticky=constants.W)
-        self._username_input.grid(padx=5, pady=10, sticky=constants.EW)
+        label.grid(padx=5, pady=5, sticky=constants.W)
+        self._username_input.grid(padx=5, pady=5, sticky=constants.EW)
 
     def _initialize_password_field(self):
         label = ttk.Label(master=self._frame, text='Password')
         self._password_input = ttk.Entry(master=self._frame)
 
-        label.grid(padx=10, pady=10, sticky=constants.W)
-        self._password_input.grid(padx=5, pady=10, sticky=constants.EW)
+        label.grid(padx=5, pady=5, sticky=constants.W)
+        self._password_input.grid(padx=5, pady=5, sticky=constants.EW)
 
     def _initialize_balance_field(self):
         label = ttk.Label(master=self._frame, text='Balance (€)')
@@ -50,16 +50,15 @@ class CreateUserView:
         label = ttk.Label(master=self._frame, text='Monthly Income (€)')
         self._income_input = ttk.Entry(master=self._frame)
 
-        label.grid(padx=10, pady=10, sticky=constants.W)
-        self._income_input.grid(padx=5, pady=10, sticky=constants.EW)
+        label.grid(padx=5, pady=5, sticky=constants.W)
+        self._income_input.grid(padx=5, pady=5, sticky=constants.EW)
 
     def _initialize_expenses_field(self):
-        label = ttk.Label(master=self._frame,
-                          text='Monthly Recurring Expenses (€)')
+        label = ttk.Label(master=self._frame, text='Monthly Recurring Expenses (€)')
         self._expenses_input = ttk.Entry(master=self._frame)
 
-        label.grid(padx=10, pady=10, sticky=constants.W)
-        self._income_input.grid(padx=5, pady=10, sticky=constants.EW)
+        label.grid(padx=5, pady=5, sticky=constants.W)
+        self._income_input.grid(padx=5, pady=5, sticky=constants.EW)
 
     def _create_user_handler(self):
         username = self._username_input.get()
@@ -72,7 +71,7 @@ class CreateUserView:
             self._show_error('Username and password is required')
             return
 
-        if balance <= 0 or income <= 0 or expenses <= 0:
+        if float(balance) <= 0 or float(income) <= 0 or float(expenses) <= 0:
             self._show_error('Value above 0 required')
 
         try:
@@ -93,7 +92,7 @@ class CreateUserView:
         self._frame = ttk.Frame(master=self._root)
 
         self._error_variable = StringVar(self._frame)
-        self._error_lable = ttk.Label(
+        self._error_label = ttk.Label(
             master=self._frame,
             text=self._error_variable,
             foreground='yellow'
@@ -116,8 +115,8 @@ class CreateUserView:
             text='Create New User',
             command=self._create_user_handler
         )
-        self._frame.grid_columnconfigure(0, weight=1, minsize=600)
-        login_button.grid(padx=4, pady=4, sticky=constants.EW)
-        create_user_button.grid(padx=6, pady=6, sticky=constants.EW)
+        self._frame.grid_columnconfigure(0, weight=1, minsize=800)
+        login_button.grid(padx=5, pady=5, sticky=constants.EW)
+        create_user_button.grid(padx=5, pady=5, sticky=constants.EW)
 
         self._hide_error()
