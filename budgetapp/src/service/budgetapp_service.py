@@ -53,33 +53,6 @@ class BudgetappService:
 
         return self._budget_repository.add_budget(budget)
 
-    def create_user(self, username, password, balance, income, expenses):
-        '''Creates a new user
-
-        Args:
-
-            username: string, represents the user's username
-            password: string, represents the user's password
-            balance: float , represents the users current balance
-            income: float , represents the users current monthly income
-            expenses: float , represents the users monthly recurring expenses
-
-        Returns:
-            user as User-object
-
-        '''
-        is_username_taken = self._user_repository.find_by_username(username)
-
-        if is_username_taken:
-            raise UsernameTakenError(f'The username {username} is taken')
-
-        user = self._user_repository.create(
-            User(username, password, balance, income, expenses)
-        )
-        if login:
-            self._user = user
-
-        return user
 
     def add_purchase(self, budget_id, amount, category, comment):
         '''Adds the users purchase to repository of purchases, and
@@ -121,6 +94,34 @@ class BudgetappService:
                 'Invalid username or password entered')
 
         self._user = user
+        return user
+
+    def create_user(self, username, password, balance, income, expenses, login=True):
+        '''Creates a new user
+
+        Args:
+
+            username: string, represents the user's username
+            password: string, represents the user's password
+            balance: float , represents the users current balance
+            income: float , represents the users current monthly income
+            expenses: float , represents the users monthly recurring expenses
+
+        Returns:
+            user as User-object
+
+        '''
+        is_username_taken = self._user_repository.find_by_username(username)
+
+        if is_username_taken:
+            raise UsernameTakenError(f'The username {username} is taken')
+
+        user = self._user_repository.create_user(
+            User(username, password, balance, income, expenses)
+        )
+        if login:
+            self._user = user
+
         return user
 
     def current_user(self):

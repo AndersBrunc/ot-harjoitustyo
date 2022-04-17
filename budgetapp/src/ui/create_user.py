@@ -44,7 +44,7 @@ class CreateUserView:
         self._balance_input = ttk.Entry(master=self._frame)
 
         label.grid(padx=10, pady=10, sticky=constants.W)
-        self._balance_input.grid(padx=5, pady=10, sticky=constants.EW)
+        self._balance_input.grid(padx=5, pady=5, sticky=constants.EW)
 
     def _initialize_income_field(self):
         label = ttk.Label(master=self._frame, text='Monthly Income (€)')
@@ -58,7 +58,7 @@ class CreateUserView:
         self._expenses_input = ttk.Entry(master=self._frame)
 
         label.grid(padx=5, pady=5, sticky=constants.W)
-        self._income_input.grid(padx=5, pady=5, sticky=constants.EW)
+        self._expenses_input.grid(padx=5, pady=5, sticky=constants.EW)
 
     def _create_user_handler(self):
         username = self._username_input.get()
@@ -71,8 +71,9 @@ class CreateUserView:
             self._show_error('Username and password is required')
             return
 
-        if float(balance) <= 0 or float(income) <= 0 or float(expenses) <= 0:
+        if int(balance) <= 0 or int(income) <= 0 or int(expenses) <= 0:
             self._show_error('Value above 0 required')
+            return
 
         try:
             budgetapp_service.create_user(
@@ -97,7 +98,7 @@ class CreateUserView:
             text=self._error_variable,
             foreground='yellow'
         )
-        self._error_label.grid(padx=10, pady=10)
+        self._error_label.grid(padx=5, pady=5)
 
         self._initialize_username_field()
         self._initialize_password_field()
@@ -115,7 +116,7 @@ class CreateUserView:
             text='Create New User',
             command=self._create_user_handler
         )
-        self._frame.grid_columnconfigure(0, weight=1, minsize=800)
+        self._frame.grid_columnconfigure(1, weight=1, minsize=500)
         login_button.grid(padx=5, pady=5, sticky=constants.EW)
         create_user_button.grid(padx=5, pady=5, sticky=constants.EW)
 
