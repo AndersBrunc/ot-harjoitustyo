@@ -5,7 +5,8 @@ from entities.purchase import Purchase
 from service.budgetapp_service import (
     BudgetappService,
     InvalidCredentialsError,
-    UsernameTakenError
+    UsernameTakenError,
+    NegativeInputError
 )
 
 
@@ -29,6 +30,24 @@ class FakeUserRepository:
         new_list = list(matching_users)
         return new_list[0] if len(new_list) > 0 else None
 
+    def update_balance(self, new, username):
+        for user in self.users:
+            if user.username == username:
+                user.balance = new
+                break
+
+    def update_income(self, new, username):
+        for user in self.users:
+            if user.username == username:
+                user.income = new
+                break
+
+    def update_expenses(self, new, username):
+        for user in self.users:
+            if user.username == username:
+                user.expenses = new
+                break
+
 
 class FakeBudgetRepository:
     def __init__(self, budgets=None):
@@ -39,9 +58,15 @@ class FakeBudgetRepository:
 
     def find_by_username(self, username):
         user_budgets = filter(
-            lambda budget: budget.user and budget.user.username == username, self.budgets
+            lambda budget: budget and budget.username == username, self.budgets
         )
         return list(user_budgets)
+
+    def find_by_id(self, b_id):
+        budgets = filter(
+            lambda budget: budget and budget.id == b_id, self.budgets
+        )
+        return list(budgets)[0]
 
     def create_budget(self, budget):
         self.budgets.append(budget)
@@ -55,6 +80,12 @@ class FakeBudgetRepository:
     def delete_all(self):
         self.budgets = []
 
+    def update_current_amount(self, new, budget_id):
+        for budget in self.budgets:
+            if budget.id == budget_id:
+                budget.c_amount = new
+                break
+
 
 class FakePurchaseRepository:
     def __init__(self, purchases=None):
@@ -65,7 +96,7 @@ class FakePurchaseRepository:
 
     def find_by_username(self, username):
         user_purchases = filter(
-            lambda purchase: purchase.user and purchase.user.username == username,
+            lambda purchase: purchase.user and purchase.username == username,
             self.purchases
         )
         return list(user_purchases)
@@ -95,15 +126,18 @@ class FakePurchaseRepository:
 class TestBudgetappService(unittest.TestCase):
     def setUp(self):
         self.budgetapp_service = BudgetappService(
-            FakePurchaseRepository,
+            FakePurchaseRepository(),
             FakeBudgetRepository(),
             FakeUserRepository()
         )
         self.user_testuser = User('Testuser', 'test123', 1000, 500, 200)
-        self.budget_a = Budget('Budget_A', self.user_testuser.username, 200, 200)
-        self.budget_b = Budget('Budget_A', self.user_testuser.username, 200, 200)
+        self.budget_a = Budget(
+            'Budget_A', self.user_testuser.username, 200, 200)
+        self.budget_b = Budget(
+            'Budget_A', self.user_testuser.username, 200, 200)
         self.purchase_a = Purchase('Food', 10, self.user_testuser.username, '')
-        self.purchase_b = Purchase('Food', 5.5, self.user_testuser.username, 'Lidl')
+        self.purchase_b = Purchase(
+            'Food', 5.5, self.user_testuser.username, 'Lidl')
         self.purchase_c = Purchase(
             'Misc', 88, self.user_testuser.username, 'random stuff')
 
@@ -172,3 +206,5 @@ class TestBudgetappService(unittest.TestCase):
             UsernameTakenError,
             lambda: self.budgetapp_service.create_user(username, '4', 3, 2, 1)
         )
+
+    

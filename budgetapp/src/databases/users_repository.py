@@ -74,8 +74,8 @@ class UserRepository:
         cursor = self._connection.cursor()
         cursor.execute('delete from users')
         self._connection.commit()
-    
-    def update_balance(self,new,username):
+
+    def update_balance(self, new, username):
         '''Updates users balance
 
         Args:
@@ -84,22 +84,24 @@ class UserRepository:
 
         '''
         cursor = self._connection.cursor()
-        cursor.execute('update users set balance = ? where username = ?', (new,username,))
+        cursor.execute(
+            'update users set balance = ? where username = ?', (new, username,))
         self._connection.commit()
 
-    def update_income(self,new,username):
+    def update_income(self, new, username):
         '''Updates users income
-        
+
         Args:
             new: represents the new income
             username: represents the users username
 
         '''
         cursor = self._connection.cursor()
-        cursor.execute('update users set income = ? where username = ?', (new,username,))
+        cursor.execute(
+            'update users set income = ? where username = ?', (new, username,))
         self._connection.commit()
 
-    def update_expenses(self,new,username):
+    def update_expenses(self, new, username):
         '''Updates users expenses
 
         Args:
@@ -108,9 +110,9 @@ class UserRepository:
 
         '''
         cursor = self._connection.cursor()
-        cursor.execute('update users set expenses = ? where username = ?', (new,username,))
+        cursor.execute(
+            'update users set expenses = ? where username = ?', (new, username,))
         self._connection.commit()
-
 
 
 user_repository = UserRepository(get_database_connection())

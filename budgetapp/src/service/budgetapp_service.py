@@ -21,6 +21,10 @@ class InvalidCredentialsError(Exception):
     pass
 
 
+class NegativeInputError(Exception):
+    pass
+
+
 class BudgetappService:
     '''The class of the application service'''
 
@@ -48,7 +52,7 @@ class BudgetappService:
         Returns:
             budget as Budget-object
         '''
-        budget = Budget(name=name, user=self._user,
+        budget = Budget(name=name, username=self._user.username,
                         og_amount=amount, c_amount=amount)
 
         return self._budget_repository.add_budget(budget)
@@ -65,12 +69,28 @@ class BudgetappService:
                 optinal, defaults to empty string "".
                 string, represents the users comment on the purchase
         '''
-        purchase = self._purchase_repository.add_purchase(
-            Purchase(category, amount, self._user, comment)
-        )
 
-        self._budget_repository.remove_amount(amount, budget_id)
-        self._user.balance -= amount
+        try:
+            purchase_amount = float(amount)
+        except:
+            raise TypeError('purchase amount must be a positive number')
+
+        if purchase_amount < 0:
+            raise NegativeInputError('The purchase amount must be positive')
+
+        purchase = Purchase(category, purchase_amount,
+                            self._user.username, comment)
+
+        self._purchase_repository.add_purchase(purchase)
+
+        self._user.balance -= purchase_amount
+        self._user_repository.update_balance(
+            self._user.balance, self._user.username)
+
+        c_amount = self._budget_repository.find_by_id(budget_id).c_amount
+        c_amount -= purchase_amount
+
+        self._budget_repository.update_current_amount(c_amount, budget_id)
 
     def login(self, username, password):
         '''Logs user in
@@ -114,6 +134,19 @@ class BudgetappService:
 
         if is_username_taken:
             raise UsernameTakenError(f'The username {username} is taken')
+
+        try:
+            balance = float(balance)
+            income = float(income)
+            expenses = float(expenses)
+
+        except:
+            TypeError(
+                'The balance, income and expenses need to be posistive numbers')
+
+        if balance < 0 or income < 0 or expenses < 0:
+            raise NegativeInputError(
+                'The balance, income and expenses need to be posistive numbers')
 
         user = self._user_repository.create_user(
             User(username, password, balance, income, expenses)

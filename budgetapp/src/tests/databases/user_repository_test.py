@@ -31,3 +31,30 @@ class TestUserRepository(unittest.TestCase):
         user = user_repository.find_by_username(self.user_mrtest.username)
 
         self.assertEqual(user.username, self.user_mrtest.username)
+
+    def test_update_balance(self):
+        user_repository.create_user(self.user_mrtest)
+        new_balance = 200
+        username = self.user_mrtest.username
+        user_repository.update_balance(new_balance, username)
+        balance = user_repository.find_by_username(username).balance
+
+        self.assertEqual(new_balance, balance)
+
+    def test_update_income(self):
+        user_repository.create_user(self.user_mrtest)
+        new_income = 200
+        username = self.user_mrtest.username
+        user_repository.update_income(new_income, username)
+        income = user_repository.find_by_username(username).income
+
+        self.assertEqual(new_income, income)
+
+    def test_update_expenses(self):
+        user_repository.create_user(self.user_mrtest)
+        new_expenses = 200
+        username = self.user_mrtest.username
+        user_repository.update_expenses(new_expenses, username)
+        expenses = user_repository.find_by_username(username).expenses
+
+        self.assertEqual(new_expenses, expenses)

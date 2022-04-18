@@ -1,8 +1,10 @@
 from entities.purchase import Purchase
 from db_connection import get_database_connection
 
-def get_purchase_by_row(self):
-    return Purchase(row['category'], row['amount'], row['user'], row['comment']) if row else None
+
+def get_purchase_by_row(row):
+    return Purchase(row['category'], row['amount'], row['username'], row['comment']) if row else None
+
 
 class PurchaseRepository:
     '''Class of the purchase-repository
@@ -40,11 +42,11 @@ class PurchaseRepository:
         '''
         all_purchases = self.fetch_all()
         new = filter(
-            lambda purchase: purchase and purchase.user.username == username,
+            lambda purchase: purchase and purchase.username == username,
             all_purchases
         )
         return list(new)
-        
+
     def find_by_category(self, category, username):
         '''Finds purchase based on category and username
         '''
@@ -63,8 +65,12 @@ class PurchaseRepository:
         '''
         cursor = self._connection.cursor()
         cursor.execute(
-            'insert into purchases (category,amount,username,comment,p_id) values (?,?,?,?,?)',
-            (purchase.name, purchase.amount, purchase.username, purchase.comment, purchase.id)
+            'insert into purchases (p_id,category,amount,username,comment) values (?,?,?,?,?)',
+            (purchase.id,
+             purchase.category,
+             purchase.amount,
+             purchase.username,
+             purchase.comment)
         )
         self._connection.commit()
 
@@ -88,5 +94,5 @@ class PurchaseRepository:
         cursor.execute('delete from purchases')
         self._connection.commit()
 
-purchase_repository = PurchaseRepository(get_database_connection())
 
+purchase_repository = PurchaseRepository(get_database_connection())

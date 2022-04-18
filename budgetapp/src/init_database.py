@@ -33,11 +33,11 @@ def create_tables(connection):
     ''')
     cursor.execute('''
         create table purchases (
-            category text primary key,
+            p_id text primary key,
+            category text,
             amount float,
             username text,
-            comment text,
-            p_id text
+            comment text
         );
     ''')
 
