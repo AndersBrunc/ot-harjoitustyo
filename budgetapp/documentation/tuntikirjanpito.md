@@ -12,4 +12,5 @@
 | 15.4| 5    | familiarized more with TkInter, wrote some ui code|
 | 17.4| 4    | wrote some test code and fixed some ui issues|
 |     | 4    | wrote even more test code, rewrote some databse code|
+| 18.4| 4    | more test code, tried fixing ui errors|
 | tot | 52   | |
