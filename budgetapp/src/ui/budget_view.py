@@ -24,7 +24,7 @@ class BudgetView:
     def _initialize_header(self):
         label = ttk.Label(
             master=self._frame,
-            text=f'Logged in as {self._user.username}'
+            text=f'Logged in as {(self._user).username}'
         )
         logout_button = ttk.Button(
             master=self._frame,

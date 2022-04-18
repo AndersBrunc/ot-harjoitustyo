@@ -196,6 +196,7 @@ class TestBudgetappService(unittest.TestCase):
 
         self.assertEqual(len(all_users), 1)
         self.assertEqual(all_users[0].username, username)
+        self.assertEqual(self.budgetapp_service.current_user().username, username)
 
     def test_create_user_fails_if_already_exist(self):
         username = self.user_testuser.username
@@ -207,4 +208,3 @@ class TestBudgetappService(unittest.TestCase):
             lambda: self.budgetapp_service.create_user(username, '4', 3, 2, 1)
         )
 
-    
