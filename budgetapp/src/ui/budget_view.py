@@ -96,13 +96,13 @@ class BudgetView:
             text='Logout',
             command=self._logout_handler
         )
-        label.grid(row=1, column=0, padx=10, pady=10, sticky=constants.W)
+        label.grid(row=1, column=0, padx=5, pady=5, sticky=constants.W)
         logout_button.grid(
-            row=1,
-            column=1,
-            padx=10,
-            pady=10,
-            sticky=constants.EW
+            row=2,
+            column=0,
+            padx=5,
+            pady=5,
+            sticky=constants.W
         )
 
     def _initialize_footer(self):
@@ -135,5 +135,5 @@ class BudgetView:
             sticky=constants.EW
         )
 
-        self._frame.grid_columnconfigure(0, weight=1, minsize=600)
+        self._frame.grid_columnconfigure(0, weight=1, minsize=500)
         self._frame.grid_columnconfigure(1, weight=0)

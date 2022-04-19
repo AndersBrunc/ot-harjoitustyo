@@ -64,7 +64,7 @@ class PurchaseView:
 
     def _logout_handler(self):
         budgetapp_service.logout()
-        self._handle_logout
+        self._handle_logout()
 
     def _handle_delete_one(self, purchase_id):
         budgetapp_service.delete_purchase(purchase_id)
