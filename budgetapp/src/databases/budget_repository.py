@@ -3,7 +3,7 @@ from db_connection import get_database_connection
 
 
 def get_budget_by_row(row):
-    return Budget(row['name'], row['username'], row['og_amount'], row['c_amount']) if row else None
+    return Budget(row['name'], row['username'], row['og_amount'], row['c_amount'], row['b_id']) if row else None
 
 
 class BudgetRepository:
@@ -91,7 +91,8 @@ class BudgetRepository:
         cursor = self._connection.cursor()
         cursor.execute('delete from budgets where b_id = ?', (b_id,))
         self._connection.commit()
-
+        print('repository delete_one')
+        
     def delete_all(self):
         '''Deletes all budgets
         '''

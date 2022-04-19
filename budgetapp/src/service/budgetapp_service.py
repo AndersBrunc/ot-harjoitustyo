@@ -213,5 +213,6 @@ class BudgetappService:
 
         '''
         self._budget_repository.delete_one(budget_id)
+        print('service delete_budget')
 
 budgetapp_service = BudgetappService()

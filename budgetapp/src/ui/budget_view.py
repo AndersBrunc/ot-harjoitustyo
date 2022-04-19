@@ -6,7 +6,7 @@ class BudgetListView:
     def __init__(self,root,budgets, handle_delete_one):
         self._root = root
         self._budgets = budgets
-        self._handle_delete_one_budget = handle_delete_one
+        self._hhandle_delete_one_budget = handle_delete_one
         self._frame = None
 
         self._initialize()
@@ -24,7 +24,7 @@ class BudgetListView:
         delete_budget_button= ttk.Button(
             master=item_frame,
             text='Delete',
-            command=lambda: self._handle_delete_one_budget(budget.id)
+            command=lambda: self._hhandle_delete_one_budget(budget.id)
         )
         label.grid(row=0 ,column=1,padx=5,pady=5,sticky=constants.W)
         delete_budget_button.grid(
@@ -89,18 +89,23 @@ class BudgetView:
         self._budget_list_view.pack()
 
     def _initialize_header(self):
-        label = ttk.Label(
+        user_label = ttk.Label(
             master=self._frame,
             text=f'Logged in as {self._user.username}'
         )
+        user_label.grid(row=0, column=0, padx=2, pady=2, sticky=constants.W)
+        user_economy_label = ttk.Label(
+            master=self._frame,
+            text=(f'Balance: {self._user.balance} €   Income: {self._user.income} €   Expenses: {self._user.expenses} €')
+        )
+        user_economy_label.grid(row=0, column=1, padx=2, pady=2, sticky=constants.E)
         logout_button = ttk.Button(
             master=self._frame,
             text='Logout',
             command=self._logout_handler
         )
-        label.grid(row=1, column=0, padx=2, pady=2, sticky=constants.W)
         logout_button.grid(
-            row=0,
+            row=1,
             column=0,
             padx=2,
             pady=2,
@@ -143,10 +148,10 @@ class BudgetView:
 
         self._budget_list_frame.grid(
             row=2,
-            column=0,
+            column=1,
             columnspan=1,
             sticky=constants.W
         )
 
-        self._frame.grid_columnconfigure(0, weight=1, minsize=500)
+        self._frame.grid_columnconfigure(0, weight=1, minsize=100)
         self._frame.grid_columnconfigure(1, weight=0)
