@@ -6,8 +6,8 @@ class BudgetListView:
     def __init__(self,root,budgets, handle_delete_one):
         self._root = root
         self._budgets = budgets
-        self._handle_delete_one= handle_delete_one
-        self._frame =None
+        self._handle_delete_one_budget = handle_delete_one
+        self._frame = None
 
         self._initialize()
 
@@ -22,20 +22,21 @@ class BudgetListView:
         label = ttk.Label(master=item_frame, text = budget.name)
 
         delete_budget_button= ttk.Button(
-            master=self._frame,
+            master=item_frame,
             text='Delete',
             command=lambda: self._handle_delete_one_budget(budget.id)
         )
-        label.grid(row=0 ,column=0,padx=5,pady=5,sticky=constants.W)
+        label.grid(row=0 ,column=2,padx=5,pady=5,sticky=constants.W)
         delete_budget_button.grid(
             row=0,
             column=1,
             padx=5,
             pady=5,
-            sticky=constants.EW
+            sticky=constants.W
         )
         item_frame.grid_columnconfigure(0, weight=1)
         item_frame.pack(fill=constants.X)
+
 
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)
@@ -70,7 +71,7 @@ class BudgetView:
         self._handle_logout()
 
     def _handle_delete_one_budget(self, budget_id):
-        budgetapp_service.delete_one(budget_id)
+        budgetapp_service.delete_budget(budget_id)
         self._initialize_budget_list()
 
     def _initialize_budget_list(self):
@@ -97,12 +98,12 @@ class BudgetView:
             text='Logout',
             command=self._logout_handler
         )
-        label.grid(row=1, column=0, padx=5, pady=5, sticky=constants.W)
+        label.grid(row=1, column=0, padx=2, pady=2, sticky=constants.W)
         logout_button.grid(
-            row=2,
+            row=0,
             column=0,
-            padx=5,
-            pady=5,
+            padx=2,
+            pady=2,
             sticky=constants.W
         )
 
@@ -113,8 +114,8 @@ class BudgetView:
             command=self._handle_create_budget
         )
         create_budget_button.grid(
-            row=2,
-            column=1,
+            row=3,
+            column=0,
             padx=5,
             pady=5,
             sticky=constants.EW
@@ -125,8 +126,8 @@ class BudgetView:
             command=self._handle_show_purchases
         )
         purchase_history_button.grid(
-            row=2,
-            column=2,
+            row=4,
+            column=0,
             padx=5,
             pady=5,
             sticky=constants.EW
@@ -141,10 +142,10 @@ class BudgetView:
         self._initialize_footer()
 
         self._budget_list_frame.grid(
-            row=1,
+            row=2,
             column=0,
-            columnspan=2,
-            sticky=constants.EW
+            columnspan=1,
+            sticky=constants.W
         )
 
         self._frame.grid_columnconfigure(0, weight=1, minsize=500)
