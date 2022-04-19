@@ -18,7 +18,7 @@ class PurchaseListView:
 
     def _initialize_purchase_item(self, purchase):
         item_frame = ttk.Frame(master=self._frame)
-        label = ttk.Label(master=self._frame, text=purchase.category)
+        label = ttk.Label(master=item_frame, text=purchase.category)
 
         delete_purchase_button = ttk.Button(
             master=item_frame,
