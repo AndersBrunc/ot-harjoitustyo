@@ -47,7 +47,8 @@ class UI:
 
         self._current_view = BudgetView(
             self._root,
-            self._show_login_view
+            self._show_login_view,
+            self._show_purchase_history_view
         )
         self._current_view.pack()
 

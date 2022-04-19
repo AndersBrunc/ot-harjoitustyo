@@ -49,6 +49,9 @@ class BudgetView:
         self._handle_show_purchases = handle_show_purchases
         self._user = budgetapp_service.current_user()
         
+        self._budget_list_view = None
+        self._budget_list_frame = None
+
         self._frame = None
 
         self._initialize()
@@ -71,7 +74,7 @@ class BudgetView:
         if self._budget_list_view:
             self._budget_list_view.destroy()
 
-        budgets = budgetapp_service.find_by_username(self._user.username)
+        budgets = budgetapp_service.fetch_user_budgets()
 
         self._budget_list_view = BudgetListView(
             self._budget_list_frame,
