@@ -9,6 +9,8 @@ class BudgetListView:
         self._handle_delete_one= handle_delete_one
         self._frame =None
 
+        self._initialize()
+        
     def pack(self):
         self._frame.pack(fill=constants.X)
 
@@ -87,7 +89,7 @@ class BudgetView:
     def _initialize_header(self):
         label = ttk.Label(
             master=self._frame,
-            text=f'Logged in as testing'
+            text=f'Logged in as {self._user.username}'
         )
         logout_button = ttk.Button(
             master=self._frame,
