@@ -209,10 +209,10 @@ class BudgetappService:
         '''Deletes specific budget
         
         Args:
-            budget_id: th id of the budget
+            budget_id: the id of the budget
 
         '''
         self._budget_repository.delete_one(budget_id)
-        print('service delete_budget')
+
 
 budgetapp_service = BudgetappService()
