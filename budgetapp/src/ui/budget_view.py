@@ -19,14 +19,14 @@ class BudgetListView:
 
     def _initialize_budget_item(self, budget):
         item_frame = ttk.Frame(master=self._frame)
-        label = ttk.Label(master=self._frame, text = budget.name)
+        label = ttk.Label(master=item_frame, text = budget.name)
 
         delete_budget_button= ttk.Button(
             master=self._frame,
             text='Delete',
             command=lambda: self._handle_delete_one_budget(budget.id)
         )
-        label.grid(row=0 ,column=0,padx=10,pady=10,sticky=constants.W)
+        label.grid(row=0 ,column=0,padx=5,pady=5,sticky=constants.W)
         delete_budget_button.grid(
             row=0,
             column=1,
@@ -115,8 +115,8 @@ class BudgetView:
         create_budget_button.grid(
             row=2,
             column=1,
-            padx=10,
-            pady=10,
+            padx=5,
+            pady=5,
             sticky=constants.EW
         )
         purchase_history_button = ttk.Button(
@@ -127,8 +127,8 @@ class BudgetView:
         purchase_history_button.grid(
             row=2,
             column=2,
-            padx=10,
-            pady=10,
+            padx=5,
+            pady=5,
             sticky=constants.EW
         )
 
