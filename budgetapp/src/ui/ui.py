@@ -3,6 +3,7 @@ from ui.create_user import CreateUserView
 from ui.budget_view import BudgetView
 from ui.view_history import PurchaseView
 from ui.create_budget import CreateBudgetView
+from ui.add_purchase_view import AddPurchaseView
 
 from tkinter import Tk, ttk
 
@@ -49,7 +50,8 @@ class UI:
             self._root,
             self._show_login_view,
             self._show_purchase_history_view,
-            self._show_create_budget_view
+            self._show_create_budget_view,
+            self._show_add_purchase_view
         )
         self._current_view.pack()
 
@@ -67,8 +69,17 @@ class UI:
         self._hide_current_view()
 
         self._current_view = CreateBudgetView(
-                self._root,
+            self._root,
             self._show_login_view,
             self._show_budget_view
         )
         self._current_view.pack()
+
+    def _show_add_purchase_view(self):
+        self._hide_current_view()
+
+        self._current_view = AddPurchaseView(
+            self._root,
+            self._show_login_view,
+            self._show_budget_view
+        )

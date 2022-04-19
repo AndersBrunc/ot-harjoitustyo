@@ -3,10 +3,11 @@ from service.budgetapp_service import budgetapp_service
 
 
 class BudgetListView:
-    def __init__(self,root,budgets, handle_delete_one):
+    def __init__(self,root,budgets, handle_delete_one, handle_add_purchase):
         self._root = root
         self._budgets = budgets
-        self._hhandle_delete_one_budget = handle_delete_one
+        self._handle_delete_one_budget = handle_delete_one
+        self._handle_add_purchase = handle_add_purchase
         self._frame = None
 
         self._initialize()
@@ -19,12 +20,24 @@ class BudgetListView:
 
     def _initialize_budget_item(self, budget):
         item_frame = ttk.Frame(master=self._frame)
-        label = ttk.Label(master=item_frame, text = budget.name)
+        label = ttk.Label(master=item_frame, text = f'{budget.name}: {budget.c_amount} € left')
 
+        add_purchase_button = ttk.Button(
+            master=item_frame,
+            text='Add Purchase',
+            command=lambda: self._handle_add_purchase
+        )
+        add_purchase_button.grid(
+            row=0,
+            column=1,
+            padx=5,
+            pady=5,
+            sticky=constants.W
+        )
         delete_budget_button= ttk.Button(
             master=item_frame,
             text='Delete',
-            command=lambda: self._hhandle_delete_one_budget(budget.id)
+            command=lambda: self._handle_delete_one_budget(budget.id)
         )
         label.grid(row=0 ,column=1,padx=5,pady=5,sticky=constants.W)
         delete_budget_button.grid(
@@ -46,11 +59,12 @@ class BudgetListView:
 
 
 class BudgetView:
-    def __init__(self, root, handle_logout, handle_show_purchases, handle_create_budget):
+    def __init__(self, root, handle_logout, handle_show_purchases, handle_create_budget, handle_show_add_purchase):
         self._root = root
         self._handle_logout = handle_logout
         self._handle_show_purchases = handle_show_purchases
         self._handle_create_budget = handle_create_budget
+        self._handle_show_add_purchase = handle_show_add_purchase
         self._user = budgetapp_service.current_user()
         
         self._budget_list_view = None
@@ -70,6 +84,9 @@ class BudgetView:
         budgetapp_service.logout()
         self._handle_logout()
 
+    def _add_purchase_handler(self):
+        self._handle_show_add_purchase()
+
     def _handle_delete_one_budget(self, budget_id):
         budgetapp_service.delete_budget(budget_id)
         self._initialize_budget_list()
@@ -83,7 +100,8 @@ class BudgetView:
         self._budget_list_view = BudgetListView(
             self._budget_list_frame,
             budgets,
-            self._handle_delete_one_budget
+            self._handle_delete_one_budget,
+            self._add_purchase_handler
         )
 
         self._budget_list_view.pack()
