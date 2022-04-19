@@ -1,4 +1,3 @@
-from calendar import c
 from tkinter import ttk, constants, StringVar
 from service.budgetapp_service import budgetapp_service, NegativeInputError
 
@@ -53,6 +52,7 @@ class CreateBudgetView:
     # create error for negative stuff
 
         budgetapp_service.create_budget(budgetname, amount)
+        self._handle_show_budget_view()
         
     def _show_error(self, text):
         self._error_variable.set(text)
