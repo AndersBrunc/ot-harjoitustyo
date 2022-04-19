@@ -88,8 +88,7 @@ class BudgetView:
         self._budget_list_view = BudgetListView(
             self._budget_list_frame,
             budgets,
-            self._handle_delete_one_budget,
-            self._add_purchase_handler
+            self._handle_delete_one_budget
         )
 
         self._budget_list_view.pack()
@@ -149,8 +148,8 @@ class BudgetView:
             command=lambda: self._handle_add_purchase
         )
         add_purchase_button.grid(
-            row=0,
-            column=2,
+            row=3,
+            column=1,
             padx=5,
             pady=5,
             sticky=constants.EW
