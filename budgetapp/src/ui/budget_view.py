@@ -45,10 +45,11 @@ class BudgetListView:
 
 
 class BudgetView:
-    def __init__(self, root, handle_logout, handle_show_purchases):
+    def __init__(self, root, handle_logout, handle_show_purchases, handle_create_budget):
         self._root = root
         self._handle_logout = handle_logout
         self._handle_show_purchases = handle_show_purchases
+        self._handle_create_budget = handle_create_budget
         self._user = budgetapp_service.current_user()
         
         self._budget_list_view = None
@@ -106,7 +107,18 @@ class BudgetView:
         )
 
     def _initialize_footer(self):
-
+        create_budget_button = ttk.Button(
+            master=self._frame,
+            text='Create Budget',
+            command=self._handle_create_budget
+        )
+        create_budget_button.grid(
+            row=2,
+            column=1,
+            padx=10,
+            pady=10,
+            sticky=constants.EW
+        )
         purchase_history_button = ttk.Button(
             master=self._frame,
             text = 'View Purchase History',
@@ -114,7 +126,7 @@ class BudgetView:
         )
         purchase_history_button.grid(
             row=2,
-            column=1,
+            column=2,
             padx=10,
             pady=10,
             sticky=constants.EW
