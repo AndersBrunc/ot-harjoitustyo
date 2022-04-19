@@ -3,11 +3,10 @@ from service.budgetapp_service import budgetapp_service
 
 
 class BudgetListView:
-    def __init__(self,root,budgets, handle_delete_one, handle_add_purchase):
+    def __init__(self,root,budgets, handle_delete_one):
         self._root = root
         self._budgets = budgets
         self._handle_delete_one_budget = handle_delete_one
-        self._handle_add_purchase = handle_add_purchase
         self._frame = None
 
         self._initialize()
@@ -22,18 +21,6 @@ class BudgetListView:
         item_frame = ttk.Frame(master=self._frame)
         label = ttk.Label(master=item_frame, text = f'{budget.name}: {budget.c_amount} € left')
 
-        add_purchase_button = ttk.Button(
-            master=item_frame,
-            text='Add Purchase',
-            command=lambda: self._handle_add_purchase
-        )
-        add_purchase_button.grid(
-            row=0,
-            column=1,
-            padx=5,
-            pady=5,
-            sticky=constants.W
-        )
         delete_budget_button= ttk.Button(
             master=item_frame,
             text='Delete',
@@ -50,12 +37,13 @@ class BudgetListView:
         item_frame.grid_columnconfigure(0, weight=1)
         item_frame.pack(fill=constants.X)
 
-
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)
-
+        
         for budget in self._budgets:
             self._initialize_budget_item(budget)
+        
+
 
 
 class BudgetView:
@@ -155,7 +143,18 @@ class BudgetView:
             pady=5,
             sticky=constants.EW
         )
-
+        add_purchase_button = ttk.Button(
+            master=self._frame,
+            text='Add Purchase',
+            command=lambda: self._handle_add_purchase
+        )
+        add_purchase_button.grid(
+            row=0,
+            column=2,
+            padx=5,
+            pady=5,
+            sticky=constants.EW
+        )
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)
         self._budget_list_frame = ttk.Frame(master=self._frame)
