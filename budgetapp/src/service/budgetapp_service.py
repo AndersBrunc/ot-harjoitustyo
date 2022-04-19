@@ -196,5 +196,22 @@ class BudgetappService:
         '''
         self._user = None
 
+    def delete_purchase(self, purchase_id):
+        '''Deletes specific purchase
+        
+        Args:
+            purchase_id: th id of the purchase
+
+        '''
+        self._purchase_repository.delete_one(purchase_id)
+
+    def delete_budget(self, budget_id):
+        '''Deletes specific budget
+        
+        Args:
+            budget_id: th id of the budget
+
+        '''
+        self._budget_repository.delete_one(budget_id)
 
 budgetapp_service = BudgetappService()

@@ -26,10 +26,10 @@ class BudgetListView:
             text='Delete',
             command=lambda: self._handle_delete_one_budget(budget.id)
         )
-        label.grid(row=0 ,column=2,padx=5,pady=5,sticky=constants.W)
+        label.grid(row=0 ,column=1,padx=5,pady=5,sticky=constants.W)
         delete_budget_button.grid(
             row=0,
-            column=1,
+            column=0,
             padx=5,
             pady=5,
             sticky=constants.W
