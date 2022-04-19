@@ -93,9 +93,21 @@ class PurchaseView:
             text='Logout',
             command=self._logout_handler
         )
+        back_to_budgets_button = ttk.Button(
+            master=self._frame,
+            text='Back',
+            command=self._handle_show_budget_view
+        )
         label.grid(row=1, column=0, padx=10, pady=10, sticky=constants.W)
         logout_button.grid(
             row=1,
+            column=1,
+            padx=10,
+            pady=10,
+            sticky=constants.EW
+        )
+        back_to_budgets_button.grid(
+            row=2,
             column=1,
             padx=10,
             pady=10,
@@ -109,7 +121,7 @@ class PurchaseView:
         self._initialize_header()
         self._initialize_purchase_list()
 
-        self._budget_list_frame.grid(
+        self._purchase_list_frame.grid(
             row=1,
             column=0,
             columnspan=2,
