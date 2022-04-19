@@ -49,7 +49,7 @@ class CreateBudgetView:
             self._show_error('A name for the budget is required')
             return
 
-    # create error for negative stuff
+    # must create error for negative stuff
 
         budgetapp_service.create_budget(budgetname, amount)
         self._handle_show_budget_view()
