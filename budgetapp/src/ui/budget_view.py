@@ -10,7 +10,7 @@ class BudgetListView:
         self._frame =None
 
         self._initialize()
-        
+
     def pack(self):
         self._frame.pack(fill=constants.X)
 
@@ -135,5 +135,5 @@ class BudgetView:
             sticky=constants.EW
         )
 
-        self._frame.grid_configure(1, weight=1, minsize=600)
+        self._frame.grid_configure(0, weight=1, minsize=600)
         self._frame.grid_columnconfigure(1, weight=0)
