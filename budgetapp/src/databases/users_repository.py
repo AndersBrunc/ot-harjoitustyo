@@ -23,7 +23,7 @@ class UserRepository:
         '''Adds user to the database
 
         Args:
-            user: the user to be added
+            user: User-object, the user to be added
 
         Returns:
             The added user as User object
@@ -35,6 +35,8 @@ class UserRepository:
             (user.username, user.password, user.balance, user.income, user.expenses)
         )
         self._connection.commit()
+
+        return user
 
     def fetch_all(self):
         '''Returns all users
