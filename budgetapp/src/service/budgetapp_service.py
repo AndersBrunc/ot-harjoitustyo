@@ -1,3 +1,4 @@
+import re
 from entities.budget import Budget
 from entities.user import User
 from entities.purchase import Purchase
@@ -172,6 +173,23 @@ class BudgetappService:
 
         '''
         return self._user_repository.fetch_all()
+
+    def fetch_user_budgets(self):
+        '''Returns all of the users budgets
+
+        Returns:
+            Budget-objects in a list
+        '''
+        return self._budget_repository.find_by_username(self._user.username)
+
+    def fetch_user_purchases(self):
+        '''Returns all of the users purchases
+
+        Returns:
+            Purchase-objects in a list
+        '''
+
+        return self._purchase_repository.find_by_username(self._user.username)
 
     def logout(self):
         '''Logs user out
