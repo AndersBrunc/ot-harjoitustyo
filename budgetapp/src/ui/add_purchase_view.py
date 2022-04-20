@@ -130,7 +130,8 @@ class AddPurchaseView:
             text=self._error_variable,
             foreground='yellow'
         )
-    
+        self._error_label.grid(padx=5, pady=5)
+        
         self._initialize_header
         self._initialize_budget_selection
         self._intitialize_category_selection
@@ -143,7 +144,7 @@ class AddPurchaseView:
             command=self._add_purchase_handler
         )
         add_purchase_button.grid(padx=5, pady=5, sticky=constants.EW)
-        
+
         self._frame.grid_columnconfigure(1, weight=1, minsize=500)
 
         self._hide_error()
