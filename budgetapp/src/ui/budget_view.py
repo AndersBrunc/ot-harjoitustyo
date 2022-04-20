@@ -72,9 +72,6 @@ class BudgetView:
         budgetapp_service.logout()
         self._handle_logout()
 
-    def _add_purchase_handler(self):
-        self._handle_show_add_purchase()
-
     def _handle_delete_one_budget(self, budget_id):
         budgetapp_service.delete_budget(budget_id)
         self._initialize_budget_list()
@@ -145,7 +142,7 @@ class BudgetView:
         add_purchase_button = ttk.Button(
             master=self._frame,
             text='Add Purchase',
-            command=lambda: self._handle_add_purchase
+            command=lambda: self._handle_show_add_purchase
         )
         add_purchase_button.grid(
             row=3,
