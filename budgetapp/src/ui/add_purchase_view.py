@@ -153,8 +153,9 @@ class AddPurchaseView:
             text='Add Purchase',
             command=self._add_purchase_handler
         )
-        add_purchase_button.grid(padx=5, pady=5, sticky=constants.EW)
+        add_purchase_button.grid(row=4,column=1 ,padx=5, pady=5, sticky=constants.EW)
 
         self._frame.grid_columnconfigure(0, weight=1, minsize=500)
         self._frame.grid_columnconfigure(1, weight=0)
+        
         self._hide_error()
