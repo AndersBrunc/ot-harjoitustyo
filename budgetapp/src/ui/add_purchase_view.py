@@ -71,6 +71,9 @@ class AddPurchaseView:
             pady=2,
             sticky=constants.W
         )
+    def _logout_handler(self):
+        budgetapp_service.logout()
+        self._handle_logout()
     
     def _add_purchase_handler(self):
         budget_name = self._budget_spinbox.get()
@@ -131,7 +134,7 @@ class AddPurchaseView:
             foreground='yellow'
         )
         self._error_label.grid(padx=5, pady=5)
-        
+
         self._initialize_header
         self._initialize_budget_selection
         self._intitialize_category_selection
