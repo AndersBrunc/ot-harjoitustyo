@@ -142,7 +142,7 @@ class BudgetView:
         add_purchase_button = ttk.Button(
             master=self._frame,
             text='Add Purchase',
-            command=lambda: self._handle_show_add_purchase
+            command=self._handle_show_add_purchase
         )
         add_purchase_button.grid(
             row=3,
