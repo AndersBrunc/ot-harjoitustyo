@@ -65,7 +65,7 @@ class CreateBudgetView:
             master=self._frame,
             text=f'Logged in as {self._user.username}'
         )
-        label.grid(row=1, column=0, padx=5, pady=5, sticky=constants.EW)
+        label.grid(row=0, column=0, padx=5, pady=5, sticky=constants.EW)
         
         back_to_budgets_button = ttk.Button(
             master=self._frame,
