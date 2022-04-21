@@ -2,9 +2,8 @@ from tkinter import ttk, constants, StringVar
 from service.budgetapp_service import budgetapp_service, NegativeInputError
 
 class AddPurchaseView:
-    def __init__(self, root, handle_logout, handle_show_budget_view):
+    def __init__(self, root, handle_show_budget_view):
         self._root = root
-        self._handle_logout = handle_logout
         self._handle_show_budget_view = handle_show_budget_view
         self._frame = None
 
@@ -42,18 +41,7 @@ class AddPurchaseView:
             text=(f'Balance: {self._user.balance} €   Income: {self._user.income} €   Expenses: {self._user.expenses} €')
         )
         user_economy_label.grid(row=0, column=1, padx=2, pady=2, sticky=constants.E)
-        logout_button = ttk.Button(
-            master=self._frame,
-            text='Logout',
-            command=self._logout_handler
-        )
-        logout_button.grid(
-            row=2,
-            column=0,
-            padx=2,
-            pady=2,
-            sticky=constants.W
-        )
+
    
 
     def _initialize_budget_selection(self):
@@ -101,12 +89,6 @@ class AddPurchaseView:
         label.grid(padx=5, pady=5, sticky=constants.W)
         self._comment_input.grid(row = 6 ,column = 1,padx=5, pady=5, sticky=constants.EW)
 
-  
-    def _logout_handler(self):
-        budgetapp_service.logout()
-        self._handle_logout()
-    
-  
     def _add_purchase_handler(self):
         budget_name = self._budget_spinbox.get()
         budget = filter(lambda budget: budget.name == budget_name,self._budgets)
