@@ -61,7 +61,7 @@ class EconomyListView:
     def destroy(self):
         self._frame.destroy()
 
-    def _initialize_economy_list(self):
+    def _initialize_list_items(self):
         balance_label=ttk.Label(
             master=self._frame,
             text=f'Balance: {self._user.balance} €'
@@ -112,7 +112,7 @@ class EconomyListView:
 
     def _initialize(self):
         self._frame=ttk.Frame(master=self._root)
-        self._initialize_economy_list()
+        self._initialize_list_items()
         self._initialize_footer()
 
 
