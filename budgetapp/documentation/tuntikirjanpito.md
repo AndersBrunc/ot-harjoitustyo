@@ -14,4 +14,6 @@
 |     | 4    | wrote even more test code, rewrote some databse code|
 | 18.4| 4    | more test code, tried fixing ui errors|
 | 19.4| 13   | ui, ui error fixes and function testing|
-| tot | 69   | |
+| 20.4| 4    | more ui|
+| 21.4| 4    | ui testing|
+| tot | 77   | |
