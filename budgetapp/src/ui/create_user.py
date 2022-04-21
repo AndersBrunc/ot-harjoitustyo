@@ -96,7 +96,7 @@ class CreateUserView:
         self._error_variable = StringVar(self._frame)
         self._error_label = ttk.Label(
             master=self._frame,
-            text=self._error_variable,
+            textvariable=self._error_variable,
             foreground='yellow'
         )
         self._error_label.grid(padx=5, pady=5)
@@ -117,7 +117,7 @@ class CreateUserView:
             text='Create New User',
             command=self._create_user_handler
         )
-        self._frame.grid_columnconfigure(1, weight=1, minsize=500)
+        self._frame.grid_columnconfigure(1, weight=1, minsize=200)
         login_button.grid(padx=5, pady=5, sticky=constants.EW)
         create_user_button.grid(padx=5, pady=5, sticky=constants.EW)
 
