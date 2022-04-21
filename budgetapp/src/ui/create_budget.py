@@ -2,9 +2,8 @@ from tkinter import ttk, constants, StringVar
 from service.budgetapp_service import budgetapp_service, NegativeInputError
 
 class CreateBudgetView:
-    def __init__(self,root,handle_logout, handle_show_budget_view):
+    def __init__(self,root, handle_show_budget_view):
         self._root = root
-        self._handle_logout = handle_logout
         self._handle_show_budget_view = handle_show_budget_view
         self._user = budgetapp_service.current_user()
 
@@ -66,15 +65,16 @@ class CreateBudgetView:
             master=self._frame,
             text=f'Logged in as {self._user.username}'
         )
-        logout_button = ttk.Button(
-            master=self._frame,
-            text='Logout',
-            command=self._logout_handler
-        )
         label.grid(row=1, column=0, padx=5, pady=5, sticky=constants.EW)
-        logout_button.grid(
-            row=2,
-            column=0,
+        
+        back_to_budgets_button = ttk.Button(
+            master=self._frame,
+            text='Back',
+            command=self._handle_show_budget_view
+        )
+        back_to_budgets_button.grid(
+            row=0,
+            column=1,
             padx=5,
             pady=5,
             sticky=constants.E

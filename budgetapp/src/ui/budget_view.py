@@ -186,15 +186,19 @@ class BudgetView:
             master=self._frame,
             text=f'Logged in as {self._user.username}'
         )
-        user_label.grid(row=0, column=0, padx=2, pady=2, sticky=constants.W)
-
+        user_label.grid(row=1, column=0, padx=2, pady=2, sticky=constants.W)
+        budgets_label = ttk.Label(
+            master=self._frame,
+            text='Budgets'
+        )
+        budgets_label.grid(row=1, column=1, padx=2, pady=2, sticky=constants.W)
         logout_button = ttk.Button(
             master=self._frame,
             text='Logout',
             command=self._logout_handler
         )
         logout_button.grid(
-            row=1,
+            row=0,
             column=0,
             padx=2,
             pady=2,
@@ -232,7 +236,7 @@ class BudgetView:
             command=self._handle_show_add_purchase
         )
         add_purchase_button.grid(
-            row=3,
+            row=5,
             column=1,
             padx=5,
             pady=5,
@@ -249,7 +253,7 @@ class BudgetView:
         self._initialize_footer()
 
         self._budget_list_frame.grid(
-            row=1,
+            row=2,
             column=1,
             columnspan=1,
             sticky=constants.W
@@ -262,5 +266,5 @@ class BudgetView:
             sticky=constants.W
         )
 
-        self._frame.grid_columnconfigure(0, weight=1, minsize=100)
+        self._frame.grid_columnconfigure(0, weight=1, minsize=200)
         self._frame.grid_columnconfigure(1, weight=0)

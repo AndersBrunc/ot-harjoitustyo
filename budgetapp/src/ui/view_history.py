@@ -121,5 +121,5 @@ class PurchaseView:
             sticky=constants.EW
         )
 
-        self._frame.grid_columnconfigure(0, weight=1, minsize=200)
+        self._frame.grid_columnconfigure(0, weight=1, minsize=300)
         self._frame.grid_columnconfigure(1, weight=0)
