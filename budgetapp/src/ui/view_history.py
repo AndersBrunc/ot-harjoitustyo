@@ -39,21 +39,15 @@ class PurchaseListView:
         item_frame.pack(fill=constants.X)
 
     def _initialize(self):
-        self._frame=ttk.Frame(master=self._root)
-        list_lable = ttk.Label(
-            master=self._frame,
-            text='Purchases'
-        )
-        list_lable.grid(row=2,column=0,padx=5,pady=5,sticky=constants.E)
+        self._frame=ttk.Frame(master=self._root)  
 
         for purchase in self._purchases:
             self._initialize_purchase_item(purchase)
 
 
 class PurchaseView:
-    def __init__(self, root, handle_logout, handle_show_budget_view):
+    def __init__(self, root, handle_show_budget_view):
         self._root = root
-        self._handle_logout = handle_logout
         self._handle_show_budget_view = handle_show_budget_view
         self._user = budgetapp_service.current_user()
         
@@ -68,10 +62,6 @@ class PurchaseView:
 
     def destroy(self):
         self._frame.destroy()
-
-    def _logout_handler(self):
-        budgetapp_service.logout()
-        self._handle_logout()
 
     def _handle_delete_one(self, purchase_id):
         budgetapp_service.delete_purchase(purchase_id)
@@ -95,24 +85,20 @@ class PurchaseView:
             master=self._frame,
             text=f'Logged in as {self._user.username}'
         )
-        logout_button = ttk.Button(
+
+        purchase_list_label = ttk.Label(
             master=self._frame,
-            text='Logout',
-            command=self._logout_handler
+            text='Purchases'
         )
+
         back_to_budgets_button = ttk.Button(
             master=self._frame,
             text='Back',
             command=self._handle_show_budget_view
         )
         label.grid(row=0, column=0, padx=5, pady=5, sticky=constants.W)
-        logout_button.grid(
-            row=1,
-            column=0,
-            padx=5,
-            pady=5,
-            sticky=constants.W
-        )
+        purchase_list_label.grid(row=2,column=0, padx=5, pady=5, sticky=constants.W)
+
         back_to_budgets_button.grid(
             row=0,
             column=1,
@@ -135,5 +121,5 @@ class PurchaseView:
             sticky=constants.EW
         )
 
-        self._frame.grid_columnconfigure(0, weight=1, minsize=300)
+        self._frame.grid_columnconfigure(0, weight=1, minsize=200)
         self._frame.grid_columnconfigure(1, weight=0)
