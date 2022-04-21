@@ -1,8 +1,9 @@
 from tkinter import ttk, constants, StringVar
 from service.budgetapp_service import budgetapp_service, NegativeInputError
 
+
 class CreateBudgetView:
-    def __init__(self,root, handle_show_budget_view):
+    def __init__(self, root, handle_show_budget_view):
         self._root = root
         self._handle_show_budget_view = handle_show_budget_view
         self._user = budgetapp_service.current_user()
@@ -21,11 +22,11 @@ class CreateBudgetView:
 
     def destroy(self):
         self._frame.destroy()
-    
+
     def _logout_handler(self):
         budgetapp_service.logout()
         self._handle_logout()
-    
+
     def _initialize_budgetname_field(self):
         label = ttk.Label(master=self._frame, text='Name of Budget')
         self._budgetname_input = ttk.Entry(master=self._frame)
@@ -52,7 +53,7 @@ class CreateBudgetView:
 
         budgetapp_service.create_budget(budgetname, amount)
         self._handle_show_budget_view()
-        
+
     def _show_error(self, text):
         self._error_variable.set(text)
         self._error_label.grid()
@@ -66,7 +67,7 @@ class CreateBudgetView:
             text=f'Logged in as {self._user.username}'
         )
         label.grid(row=0, column=0, padx=5, pady=5, sticky=constants.EW)
-        
+
         back_to_budgets_button = ttk.Button(
             master=self._frame,
             text='Back',
@@ -101,6 +102,6 @@ class CreateBudgetView:
             command=self._create_budget_handler
         )
         create_budget_button.grid(padx=5, pady=5, sticky=constants.EW)
-        
+
         self._frame.grid_columnconfigure(0, weight=1, minsize=300)
         self._hide_error()

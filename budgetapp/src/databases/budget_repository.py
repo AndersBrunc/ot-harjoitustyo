@@ -76,7 +76,7 @@ class BudgetRepository:
 
         '''
         cursor = self._connection.cursor()
-        cursor.execute('select * from budgets where b_id = ?',(b_id,))
+        cursor.execute('select * from budgets where b_id = ?', (b_id,))
         rows = cursor.fetchall()
 
         return list(map(get_budget_by_row, rows))[0]

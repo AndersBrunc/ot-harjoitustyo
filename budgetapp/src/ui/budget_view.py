@@ -3,7 +3,7 @@ from service.budgetapp_service import budgetapp_service
 
 
 class BudgetListView:
-    def __init__(self,root,budgets, handle_delete_one):
+    def __init__(self, root, budgets, handle_delete_one):
         self._root = root
         self._budgets = budgets
         self._handle_delete_one_budget = handle_delete_one
@@ -19,14 +19,15 @@ class BudgetListView:
 
     def _initialize_budget_item(self, budget):
         item_frame = ttk.Frame(master=self._frame)
-        label = ttk.Label(master=item_frame, text = f'{budget.name}: {budget.c_amount} € left')
+        label = ttk.Label(master=item_frame,
+                          text=f'{budget.name}: {budget.c_amount} € left')
 
-        delete_budget_button= ttk.Button(
+        delete_budget_button = ttk.Button(
             master=item_frame,
             text='Delete',
             command=lambda: self._handle_delete_one_budget(budget.id)
         )
-        label.grid(row=0 ,column=1,padx=5,pady=5,sticky=constants.W)
+        label.grid(row=0, column=1, padx=5, pady=5, sticky=constants.W)
         delete_budget_button.grid(
             row=0,
             column=0,
@@ -39,17 +40,18 @@ class BudgetListView:
 
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)
-        
+
         for budget in self._budgets:
             self._initialize_budget_item(budget)
-        
+
+
 class EconomyListView:
-    def __init__(self,root, handle_update_value):
+    def __init__(self, root, handle_update_value):
         self._root = root
         self._handle_update_value = handle_update_value
         self._user = budgetapp_service.current_user()
         self._frame = None
-        
+
         self._economy_spinbox_value = None
         self._economy_update_input = None
 
@@ -62,42 +64,44 @@ class EconomyListView:
         self._frame.destroy()
 
     def _initialize_list_items(self):
-        balance_label=ttk.Label(
+        balance_label = ttk.Label(
             master=self._frame,
             text=f'Balance: {self._user.balance} €'
         )
-        balance_label.grid(padx=5,pady=5,sticky=constants.EW)
-        income_label=ttk.Label(
+        balance_label.grid(padx=5, pady=5, sticky=constants.EW)
+        income_label = ttk.Label(
             master=self._frame,
             text=f'Income: {self._user.income} €'
         )
-        income_label.grid(padx=5,pady=5,sticky=constants.EW)
-        expenses_label=ttk.Label(
+        income_label.grid(padx=5, pady=5, sticky=constants.EW)
+        expenses_label = ttk.Label(
             master=self._frame,
             text=f'Expenses: {self._user.expenses} €'
         )
-        expenses_label.grid(padx=5,pady=5,sticky=constants.EW)
+        expenses_label.grid(padx=5, pady=5, sticky=constants.EW)
 
     def _initialize_footer(self):
 
-        update_label=ttk.Label(master=self._frame, text='Choose Value to update:')
-        update_label.grid(padx=5,pady=5,sticky=constants.EW)
+        update_label = ttk.Label(
+            master=self._frame, text='Choose Value to update:')
+        update_label.grid(padx=5, pady=5, sticky=constants.EW)
 
-        values=['Balance','Income','Expenses']
+        values = ['Balance', 'Income', 'Expenses']
         self._economy_spinbox_value = ttk.Spinbox(
             master=self._frame,
             from_=0,
             to=3,
             increment=1,
-            values=values 
+            values=values
         )
-        self._economy_spinbox_value.grid(padx=5,pady=5,sticky=constants.EW)
+        self._economy_spinbox_value.grid(padx=5, pady=5, sticky=constants.EW)
 
-        new_amount_label=ttk.Label(master=self._frame, text='New amount (€):')
-        new_amount_label.grid(padx=5,pady=5,sticky=constants.EW)
+        new_amount_label = ttk.Label(
+            master=self._frame, text='New amount (€):')
+        new_amount_label.grid(padx=5, pady=5, sticky=constants.EW)
 
         self._economy_update_input = ttk.Entry(master=self._frame)
-        self._economy_update_input.grid(padx=5,pady=5,sticky=constants.EW)
+        self._economy_update_input.grid(padx=5, pady=5, sticky=constants.EW)
 
         update_button = ttk.Button(
             master=self._frame,
@@ -107,14 +111,12 @@ class EconomyListView:
                 self._economy_update_input.get()
             )
         )
-        update_button.grid(padx=5,pady=5,sticky=constants.EW)
-        
+        update_button.grid(padx=5, pady=5, sticky=constants.EW)
 
     def _initialize(self):
-        self._frame=ttk.Frame(master=self._root)
+        self._frame = ttk.Frame(master=self._root)
         self._initialize_list_items()
         self._initialize_footer()
-
 
 
 class BudgetView:
@@ -125,7 +127,7 @@ class BudgetView:
         self._handle_create_budget = handle_create_budget
         self._handle_show_add_purchase = handle_show_add_purchase
         self._user = budgetapp_service.current_user()
-        
+
         self._economy_list_view = None
         self._economy_list_frame = None
 
@@ -152,9 +154,9 @@ class BudgetView:
 
     def _handle_update_value(self, value, new_amount):
 
-        #error for amount input needs to be added
+        # error for amount input needs to be added
 
-        budgetapp_service.update_user_economy_value(value,new_amount)
+        budgetapp_service.update_user_economy_value(value, new_amount)
         self._initialize_economy_list()
 
     def _initialize_economy_list(self):
@@ -220,7 +222,7 @@ class BudgetView:
         )
         purchase_history_button = ttk.Button(
             master=self._frame,
-            text = 'View Purchase History',
+            text='View Purchase History',
             command=self._handle_show_purchases
         )
         purchase_history_button.grid(
@@ -242,6 +244,7 @@ class BudgetView:
             pady=5,
             sticky=constants.EW
         )
+
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)
         self._budget_list_frame = ttk.Frame(master=self._frame)

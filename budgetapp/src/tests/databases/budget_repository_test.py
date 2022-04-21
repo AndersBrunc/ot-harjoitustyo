@@ -53,7 +53,7 @@ class TestBudgetRepository(unittest.TestCase):
 
         user_budgets = budget_repository.find_by_username('MrTest')
 
-        self.assertEqual(len(user_budgets),1)
+        self.assertEqual(len(user_budgets), 1)
         self.assertEqual(len(budgets), 1)
 
     def test_find_by_id(self):

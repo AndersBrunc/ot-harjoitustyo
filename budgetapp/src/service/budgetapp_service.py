@@ -197,7 +197,7 @@ class BudgetappService:
 
     def delete_purchase(self, purchase_id):
         '''Deletes specific purchase
-        
+
         Args:
             purchase_id: th id of the purchase
 
@@ -206,7 +206,7 @@ class BudgetappService:
 
     def delete_budget(self, budget_id):
         '''Deletes specific budget
-        
+
         Args:
             budget_id: the id of the budget
 
@@ -215,20 +215,24 @@ class BudgetappService:
 
     def update_user_economy_value(self, value, new_amount):
         '''Updates the specified value to specified amount
-        
+
         Args:
             value: string, the value to be updated
             new_amount: float, the new value
         '''
-        
+
         if value == 'Balance':
             self._user.balance = new_amount
-            self._user_repository.update_balance(new_amount,self._user.username)
+            self._user_repository.update_balance(
+                new_amount, self._user.username)
         if value == 'Income':
             self._user.income = new_amount
-            self._user_repository.update_income(new_amount,self._user.username)
+            self._user_repository.update_income(
+                new_amount, self._user.username)
         if value == 'Expenses':
             self._user.expenses = new_amount
-            self._user_repository.update_expenses(new_amount,self._user.username)
+            self._user_repository.update_expenses(
+                new_amount, self._user.username)
+
 
 budgetapp_service = BudgetappService()

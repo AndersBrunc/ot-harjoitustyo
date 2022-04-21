@@ -1,13 +1,14 @@
 from tkinter import ttk, constants
 from service.budgetapp_service import budgetapp_service
 
+
 class PurchaseListView:
-    def __init__(self,root, purchases, handle_delete_one):
+    def __init__(self, root, purchases, handle_delete_one):
         self._root = root
         self._purchases = purchases
         self._handle_delete_one = handle_delete_one
-        self._frame =None
-        
+        self._frame = None
+
         self._initialize()
 
     def pack(self):
@@ -27,7 +28,7 @@ class PurchaseListView:
             text='Delete',
             command=lambda: self._handle_delete_one(purchase.id)
         )
-        label.grid(row=0 ,column=0,padx=5,pady=5,sticky=constants.W)
+        label.grid(row=0, column=0, padx=5, pady=5, sticky=constants.W)
         delete_purchase_button.grid(
             row=0,
             column=1,
@@ -39,7 +40,7 @@ class PurchaseListView:
         item_frame.pack(fill=constants.X)
 
     def _initialize(self):
-        self._frame=ttk.Frame(master=self._root)  
+        self._frame = ttk.Frame(master=self._root)
 
         for purchase in self._purchases:
             self._initialize_purchase_item(purchase)
@@ -50,7 +51,7 @@ class PurchaseView:
         self._root = root
         self._handle_show_budget_view = handle_show_budget_view
         self._user = budgetapp_service.current_user()
-        
+
         self._purchase_list_view = None
         self._purchase_list_frame = None
         self._frame = None
@@ -70,7 +71,7 @@ class PurchaseView:
     def _initialize_purchase_list(self):
         if self._purchase_list_view:
             self._purchase_list_view.destroy()
-        
+
         purchases = budgetapp_service.fetch_user_purchases()
 
         self._purchase_list_view = PurchaseListView(
@@ -97,7 +98,8 @@ class PurchaseView:
             command=self._handle_show_budget_view
         )
         label.grid(row=0, column=0, padx=5, pady=5, sticky=constants.W)
-        purchase_list_label.grid(row=2,column=0, padx=5, pady=5, sticky=constants.W)
+        purchase_list_label.grid(
+            row=2, column=0, padx=5, pady=5, sticky=constants.W)
 
         back_to_budgets_button.grid(
             row=0,
