@@ -18,14 +18,16 @@ class PurchaseListView:
 
     def _initialize_purchase_item(self, purchase):
         item_frame = ttk.Frame(master=self._frame)
-        label = ttk.Label(master=item_frame, text=purchase.category)
+        label = ttk.Label(
+            master=item_frame,
+            text=f'{purchase.category}: {purchase.amount} € | {purchase.comment}')
 
         delete_purchase_button = ttk.Button(
             master=item_frame,
             text='Delete',
             command=lambda: self._handle_delete_one(purchase.id)
         )
-        label.grid(row=0 ,column=0,padx=10,pady=10,sticky=constants.W)
+        label.grid(row=0 ,column=0,padx=5,pady=5,sticky=constants.W)
         delete_purchase_button.grid(
             row=0,
             column=1,
@@ -38,6 +40,11 @@ class PurchaseListView:
 
     def _initialize(self):
         self._frame=ttk.Frame(master=self._root)
+        list_lable = ttk.Label(
+            master=self._frame,
+            text='Purchases'
+        )
+        list_lable.grid(row=2,column=0,padx=5,pady=5,sticky=constants.E)
 
         for purchase in self._purchases:
             self._initialize_purchase_item(purchase)
@@ -98,20 +105,20 @@ class PurchaseView:
             text='Back',
             command=self._handle_show_budget_view
         )
-        label.grid(row=1, column=0, padx=10, pady=10, sticky=constants.W)
+        label.grid(row=0, column=0, padx=5, pady=5, sticky=constants.W)
         logout_button.grid(
             row=1,
-            column=1,
-            padx=10,
-            pady=10,
-            sticky=constants.EW
+            column=0,
+            padx=5,
+            pady=5,
+            sticky=constants.W
         )
         back_to_budgets_button.grid(
-            row=2,
+            row=0,
             column=1,
-            padx=10,
-            pady=10,
-            sticky=constants.EW
+            padx=5,
+            pady=5,
+            sticky=constants.E
         )
 
     def _initialize(self):
@@ -122,11 +129,11 @@ class PurchaseView:
         self._initialize_purchase_list()
 
         self._purchase_list_frame.grid(
-            row=1,
+            row=3,
             column=0,
-            columnspan=2,
+            columnspan=1,
             sticky=constants.EW
         )
 
-        self._frame.grid_columnconfigure(0, weight=1, minsize=200)
+        self._frame.grid_columnconfigure(0, weight=1, minsize=300)
         self._frame.grid_columnconfigure(1, weight=0)

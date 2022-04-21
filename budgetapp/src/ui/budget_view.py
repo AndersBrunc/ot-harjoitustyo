@@ -102,9 +102,9 @@ class EconomyListView:
         update_button = ttk.Button(
             master=self._frame,
             text='Update Value',
-            command=self._handle_update_value(
-                self._economy_spinbox_value.get,
-                self._economy_update_input.get
+            command=lambda: self._handle_update_value(
+                self._economy_spinbox_value.get(),
+                self._economy_update_input.get()
             )
         )
         update_button.grid(padx=5,pady=5,sticky=constants.EW)

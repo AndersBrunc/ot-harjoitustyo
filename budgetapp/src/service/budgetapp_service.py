@@ -223,10 +223,13 @@ class BudgetappService:
         '''
         
         if value == 'Balance':
+            self._user.balance = new_amount
             self._user_repository.update_balance(new_amount,self._user.username)
         if value == 'Income':
+            self._user.income = new_amount
             self._user_repository.update_income(new_amount,self._user.username)
         if value == 'Expenses':
+            self._user.expenses = new_amount
             self._user_repository.update_expenses(new_amount,self._user.username)
 
 budgetapp_service = BudgetappService()
