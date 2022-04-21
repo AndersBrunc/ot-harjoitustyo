@@ -3,7 +3,7 @@ from db_connection import get_database_connection
 
 
 def get_purchase_by_row(row):
-    return Purchase(row['category'], row['amount'], row['username'], row['comment']) if row else None
+    return Purchase(row['category'], row['amount'], row['username'], row['comment'], row['p_id']) if row else None
 
 
 class PurchaseRepository:
