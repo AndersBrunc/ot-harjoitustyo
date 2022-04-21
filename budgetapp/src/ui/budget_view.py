@@ -1,4 +1,5 @@
 from tkinter import ttk, constants
+from turtle import update
 from service.budgetapp_service import budgetapp_service
 
 
@@ -43,6 +44,74 @@ class BudgetListView:
         for budget in self._budgets:
             self._initialize_budget_item(budget)
         
+class EconomyListView:
+    def __init__(self,root, handle_update_value):
+        self._root = root
+        self._handle_update_value = handle_update_value
+        self._user = budgetapp_service.current_user()
+        self._frame = None
+        
+        self._economy_spinbox_value = None
+        self._economy_update_input = None
+
+        self._initialize()
+
+    def pack(self):
+        self._frame.pack(fill=constants.X)
+
+    def destroy(self):
+        self._frame.destroy()
+
+    def _initialize_economy_list(self):
+        balance_label=ttk.Label(
+            master=self._frame,
+            text=f'Balance: {self._user.balance} €'
+        )
+        balance_label.grid(padx=5,pady=5,sticky=constants.EW)
+        income_label=ttk.Label(
+            master=self._frame,
+            text=f'Income: {self._user.income} €'
+        )
+        income_label.grid(padx=5,pady=5,sticky=constants.EW)
+        expenses_label=ttk.Label(
+            master=self._frame,
+            text=f'Expenses: {self._user.expenses} €'
+        )
+        expenses_label.grid(padx=5,pady=5,sticky=constants.EW)
+
+    def _initialize_footer(self):
+
+        label=ttk.Label(master=self._frame, text='Update a Value')
+        label.grid(padx=5,pady=5,sticky=constants.EW)
+
+        values=['Balance','Income','Expenses']
+        self._economy_spinbox_value = ttk.Spinbox(
+            master=self._frame,
+            from_=0,
+            to=3,
+            increment=1,
+            values=values 
+        )
+        self._economy_spinbox_value.grid(padx=5,pady=5,sticky=constants.EW)
+        
+        self._economy_update_input = ttk.Entry(master=self._frame)
+        self._economy_update_input.grid(padx=5,pady=5,sticky=constants.EW)
+
+        update_button = ttk.Button(
+            master=self._frame,
+            text='Update Value',
+            command=self._handle_update_value(
+                self._economy_spinbox_value.get(),
+                self._economy_update_input.get()
+            )
+        )
+        update_button.grid(padx=5,pady=5,sticky=constants.EW)
+        
+
+    def _initialize(self):
+        self._frame=ttk.Frame(master=self._root)
+        self._initialize_economy_list()
+        self._initialize_footer()
 
 
 
@@ -55,6 +124,9 @@ class BudgetView:
         self._handle_show_add_purchase = handle_show_add_purchase
         self._user = budgetapp_service.current_user()
         
+        self._economy_list_view = None
+        self._economy_list_frame = None
+
         self._budget_list_view = None
         self._budget_list_frame = None
 
@@ -75,6 +147,21 @@ class BudgetView:
     def _handle_delete_one_budget(self, budget_id):
         budgetapp_service.delete_budget(budget_id)
         self._initialize_budget_list()
+
+    def _handle_update_value(self, value, new_amount):
+
+        #error for amount input needs to be added
+
+        budgetapp_service.update_user_economy_value(value,new_amount)
+
+    def _initialize_economy_list(self):
+        if self._economy_list_view:
+            self._economy_list_view.destroy()
+
+        self._economy_list_view = EconomyListView(
+            self._economy_list_frame,
+            self._handle_update_value
+        )
 
     def _initialize_budget_list(self):
         if self._budget_list_view:
@@ -156,6 +243,7 @@ class BudgetView:
         self._budget_list_frame = ttk.Frame(master=self._frame)
 
         self._initialize_header()
+        self._initialize_economy_list()
         self._initialize_budget_list()
         self._initialize_footer()
 

@@ -6,6 +6,7 @@ class AddPurchaseView:
         self._root = root
         self._handle_logout = handle_logout
         self._handle_show_budget_view = handle_show_budget_view
+        self._frame = None
 
         self._user = budgetapp_service.current_user()
         self._budgets = budgetapp_service.fetch_user_budgets()
@@ -18,7 +19,6 @@ class AddPurchaseView:
 
         self._error_variable = None
         self._error_label = None
-        self._frame = None
 
         self._initialize()
 
@@ -36,7 +36,7 @@ class AddPurchaseView:
             master=self._frame,
             text=f'Logged in as {self._user.username}'
         )
-        user_label.grid(row=0, column=0, padx=2, pady=2, sticky=constants.W)
+        user_label.grid(row=1, column=0, padx=2, pady=2, sticky=constants.W)
         user_economy_label = ttk.Label(
             master=self._frame,
             text=(f'Balance: {self._user.balance} €   Income: {self._user.income} €   Expenses: {self._user.expenses} €')
@@ -48,7 +48,7 @@ class AddPurchaseView:
             command=self._logout_handler
         )
         logout_button.grid(
-            row=1,
+            row=2,
             column=0,
             padx=2,
             pady=2,
@@ -57,7 +57,7 @@ class AddPurchaseView:
    
 
     def _initialize_budget_selection(self):
-        label = ttk.Label(master=self._frame, text='Choose Budget that will be affected')
+        label = ttk.Label(master=self._frame, text='Choose Budget that will be affected:')
         label.grid(padx=5, pady=5, sticky=constants.W)
         
         values = [budget.name for budget in self._budgets]
@@ -68,13 +68,13 @@ class AddPurchaseView:
             increment=1,
             values=values 
         )
-        self._budget_spinbox.grid(row=1 ,column=0,padx=5,pady=5,sticky=constants.W)
+        self._budget_spinbox.grid(row=3 ,column=1,padx=5,pady=5,sticky=constants.W)
 
    
     def _intitialize_category_selection(self):
-        label = ttk.Label(master=self._frame, text='Choose Category')
+        label = ttk.Label(master=self._frame, text='Choose Category:')
         label.grid(padx=5, pady=5, sticky=constants.W)
-
+        
         values = ['Food','Shopping','Transport','Other']
         self._category_spinbox = ttk.Spinbox(
             master=self._frame,
@@ -83,23 +83,23 @@ class AddPurchaseView:
             increment=1,
             values=values 
         )
-        self._category_spinbox.grid(row=1 ,column=1,padx=5,pady=5,sticky=constants.W)
+        self._category_spinbox.grid(row=4 ,column=1,padx=5,pady=5,sticky=constants.W)
 
   
     def _initialize_amount_field(self):
-        label = ttk.Label(master=self._frame, text='Receipt amount (€)')
+        label = ttk.Label(master=self._frame, text='Receipt amount (€):')
         self._amount_input = ttk.Entry(master=self._frame)
 
         label.grid(padx=5, pady=5, sticky=constants.W)
-        self._amount_input.grid(padx=5, pady=5, sticky=constants.EW)
+        self._amount_input.grid(row = 5 ,column = 1,padx=5, pady=5, sticky=constants.EW)
 
  
     def _initialize_comment_field(self):
-        label = ttk.Label(master=self._frame, text='Comment')
+        label = ttk.Label(master=self._frame, text='Comment:')
         self._comment_input = ttk.Entry(master=self._frame)
 
         label.grid(padx=5, pady=5, sticky=constants.W)
-        self._comment_input.grid(padx=5, pady=5, sticky=constants.EW)
+        self._comment_input.grid(row = 6 ,column = 1,padx=5, pady=5, sticky=constants.EW)
 
   
     def _logout_handler(self):
@@ -137,7 +137,7 @@ class AddPurchaseView:
         self._error_variable = StringVar(self._frame)
         self._error_label = ttk.Label(
             master=self._frame,
-            text=self._error_variable,
+            textvariable=self._error_variable,
             foreground='yellow'
         )
         self._error_label.grid(padx=5, pady=5)
@@ -148,14 +148,25 @@ class AddPurchaseView:
         self._initialize_amount_field()
         self._initialize_comment_field()
 
+        back_to_budgets_button = ttk.Button(
+            master=self._frame,
+            text='Back',
+            command=self._handle_show_budget_view
+        )
+        back_to_budgets_button.grid(
+            row=0,
+            column=0,
+            padx=5,
+            pady=5,
+            sticky=constants.EW
+        )
         add_purchase_button = ttk.Button(
             master=self._frame,
             text='Add Purchase',
             command=self._add_purchase_handler
         )
-        add_purchase_button.grid(row=4,column=1 ,padx=5, pady=5, sticky=constants.EW)
+        add_purchase_button.grid(row=7,column=0 ,columnspan=2,padx=5, pady=5, sticky=constants.EW)
 
-        self._frame.grid_columnconfigure(0, weight=1, minsize=500)
-        self._frame.grid_columnconfigure(1, weight=0)
-        
+        self._frame.pack()
+
         self._hide_error()

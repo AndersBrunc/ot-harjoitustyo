@@ -214,5 +214,19 @@ class BudgetappService:
         '''
         self._budget_repository.delete_one(budget_id)
 
+    def update_user_economy_value(self, value, new_amount):
+        '''Updates the specified value to specified amount
+        
+        Args:
+            value: string, the value to be updated
+            new_amount: float, the new value
+        '''
+        
+        if value == 'Balance':
+            self._user_repository.update_balance(new_amount,self._user.username)
+        if value == 'Income':
+            self._user_repository.update_income(new_amount,self._user.username)
+        if value == 'Expenses':
+            self._user_repository.update_expenses(new_amount,self._user.username)
 
 budgetapp_service = BudgetappService()

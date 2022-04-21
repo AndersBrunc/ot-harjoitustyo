@@ -31,14 +31,14 @@ class CreateBudgetView:
         label = ttk.Label(master=self._frame, text='Name of Budget')
         self._budgetname_input = ttk.Entry(master=self._frame)
 
-        label.grid(padx=5, pady=5, sticky=constants.W)
+        label.grid(padx=5, pady=5, sticky=constants.EW)
         self._budgetname_input.grid(padx=5, pady=5, sticky=constants.EW)
 
     def _initialize_amount_field(self):
         label = ttk.Label(master=self._frame, text='Budget amount (€)')
         self._amount_input = ttk.Entry(master=self._frame)
 
-        label.grid(padx=10, pady=10, sticky=constants.W)
+        label.grid(padx=10, pady=10, sticky=constants.EW)
         self._amount_input.grid(padx=5, pady=5, sticky=constants.EW)
 
     def _create_budget_handler(self):
@@ -71,13 +71,13 @@ class CreateBudgetView:
             text='Logout',
             command=self._logout_handler
         )
-        label.grid(row=1, column=0, padx=5, pady=5, sticky=constants.W)
+        label.grid(row=1, column=0, padx=5, pady=5, sticky=constants.EW)
         logout_button.grid(
             row=2,
             column=0,
             padx=5,
             pady=5,
-            sticky=constants.W
+            sticky=constants.E
         )
 
     def _initialize(self):
@@ -86,7 +86,7 @@ class CreateBudgetView:
         self._error_variable = StringVar(self._frame)
         self._error_label = ttk.Label(
             master=self._frame,
-            text=self._error_variable,
+            textvariable=self._error_variable,
             foreground='yellow'
         )
         self._error_label.grid(padx=5, pady=5)
@@ -102,5 +102,5 @@ class CreateBudgetView:
         )
         create_budget_button.grid(padx=5, pady=5, sticky=constants.EW)
         
-        self._frame.grid_columnconfigure(1, weight=1, minsize=500)
+        self._frame.grid_columnconfigure(0, weight=1, minsize=300)
         self._hide_error()
