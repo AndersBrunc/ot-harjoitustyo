@@ -91,8 +91,7 @@ class BudgetRepository:
         cursor = self._connection.cursor()
         cursor.execute('delete from budgets where b_id = ?', (b_id,))
         self._connection.commit()
-        print('repository delete_one')
-        
+
     def delete_all(self):
         '''Deletes all budgets
         '''
