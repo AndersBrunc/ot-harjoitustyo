@@ -1,4 +1,3 @@
-import re
 from entities.budget import Budget
 from entities.user import User
 from entities.purchase import Purchase
