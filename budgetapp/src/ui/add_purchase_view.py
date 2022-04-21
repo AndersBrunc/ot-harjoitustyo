@@ -140,7 +140,7 @@ class AddPurchaseView:
             column=0,
             padx=5,
             pady=5,
-            sticky=constants.EW
+            sticky=constants.W
         )
         add_purchase_button = ttk.Button(
             master=self._frame,
