@@ -25,7 +25,7 @@ class PurchaseListView:
 
         delete_purchase_button = ttk.Button(
             master=item_frame,
-            text='Delete',
+            text='X',
             command=lambda: self._handle_delete_one(purchase.id)
         )
         label.grid(row=0, column=0, padx=5, pady=5, sticky=constants.W)

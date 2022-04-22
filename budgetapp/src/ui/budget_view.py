@@ -224,7 +224,7 @@ class BudgetView:
             command=self._handle_create_budget
         )
         create_budget_button.grid(
-            row=3,
+            row=0,
             column=1,
             padx=5,
             pady=5,
