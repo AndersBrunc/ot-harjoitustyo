@@ -236,8 +236,9 @@ class BudgetView:
             command=self._handle_show_purchases
         )
         purchase_history_button.grid(
-            row=4,
-            column=1,
+            row=5,
+            column=0,
+            columnspan=2,
             padx=5,
             pady=5,
             sticky=constants.EW
@@ -248,8 +249,9 @@ class BudgetView:
             command=self._handle_show_add_purchase
         )
         add_purchase_button.grid(
-            row=5,
-            column=1,
+            row=4,
+            column=0,
+            columnspan=2,
             padx=5,
             pady=5,
             sticky=constants.EW

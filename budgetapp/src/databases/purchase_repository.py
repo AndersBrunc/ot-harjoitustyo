@@ -49,6 +49,11 @@ class PurchaseRepository:
 
     def find_by_category(self, category, username):
         '''Finds purchase based on category and username
+            Args:
+                category:
+                username:
+            Returns:
+                Purchase-objects in list
         '''
         user_purchases = self.find_by_username(username)
         categorized = filter(
@@ -56,6 +61,20 @@ class PurchaseRepository:
             user_purchases
         )
         return list(categorized)
+
+    def find_by_id(self, p_id):
+        '''Finds a specific purchase based on id
+            
+            Args:
+                p_id: string, the purchase id
+
+            Returns:
+                Purchase object
+        '''
+        cursor = self._connection.cursor()
+        cursor.execute('select * from purchases where p_id=?',(p_id,))
+        purchase = cursor.fetchone()
+        return purchase
 
     def add_purchase(self, purchase):
         '''Saves a purchase in the purchase-database

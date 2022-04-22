@@ -196,12 +196,16 @@ class BudgetappService:
         self._user = None
 
     def delete_purchase(self, purchase_id):
-        '''Deletes specific purchase
+        '''Deletes specific purchase and "gives the money back" to the user
 
         Args:
             purchase_id: th id of the purchase
 
         '''
+        purchase = self._purchase_repository.find_by_id(purchase_id)
+        self._user.balance += purchase.amount
+
+        self._user_repository.update_balance(self._user.balance,self._user.username)
         self._purchase_repository.delete_one(purchase_id)
 
     def delete_budget(self, budget_id):
