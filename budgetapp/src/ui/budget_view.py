@@ -24,7 +24,7 @@ class BudgetListView:
 
         delete_budget_button = ttk.Button(
             master=item_frame,
-            text='Delete',
+            text='X',
             command=lambda: self._handle_delete_one_budget(budget.id)
         )
         label.grid(row=0, column=1, padx=5, pady=5, sticky=constants.W)

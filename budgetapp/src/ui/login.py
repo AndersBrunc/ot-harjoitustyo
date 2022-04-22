@@ -60,7 +60,7 @@ class LoginView:
         self._error_label = ttk.Label(
             master=self._frame,
             textvariable=self._error_variable,
-            foreground='yellow'
+            foreground='orange'
         )
         self._error_label.grid(padx=10, pady=10)
 

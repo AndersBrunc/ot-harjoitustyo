@@ -100,7 +100,18 @@ class AddPurchaseView:
 
         if len(category) == 0:
             self._show_error('The purchase has to be categorized')
-        # still need error checks here
+        
+        try:
+            amount = float(amount) 
+        except:
+            ValueError('Amount must be a positive number')
+            self._show_error('Amount must be a positive number')
+            return
+
+        if float(amount) <= 0:
+            self._show_error('Amount must be a positivie number')
+            return
+
         budgetapp_service.add_purchase(budget_id, amount, category, comment)
         self._handle_show_budget_view()
 
@@ -118,9 +129,9 @@ class AddPurchaseView:
         self._error_label = ttk.Label(
             master=self._frame,
             textvariable=self._error_variable,
-            foreground='yellow'
+            foreground='orange'
         )
-        self._error_label.grid(padx=5, pady=5)
+        self._error_label.grid(row=1,column=0,padx=5, pady=5)
 
         self._initialize_header()
         self._initialize_budget_selection()

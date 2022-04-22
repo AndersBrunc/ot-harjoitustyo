@@ -72,16 +72,27 @@ class CreateUserView:
             self._show_error('Username and password is required')
             return
 
-        if int(balance) <= 0 or int(income) <= 0 or int(expenses) <= 0:
-            self._show_error('Value above 0 required')
-            return
+        try:
+            balance=float(balance)
+            income=float(income)
+            expenses=float(expenses)
 
+            if balance <= 0 or income <= 0 or expenses <= 0:
+                self._show_error('Value above 0 required')
+                return
+                
+        except:
+            ValueError('The amounts must be positive numbers')
+            self._show_error('The amounts must be positive numbers')
+            return
+        
         try:
             budgetapp_service.create_user(
                 username, password, balance, income, expenses)
             self._handle_create_user()
         except UsernameTakenError:
             self._show_error(f'The username {username} has already been taken')
+
 
     def _show_error(self, text):
         self._error_variable.set(text)
