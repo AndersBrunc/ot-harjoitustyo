@@ -97,9 +97,9 @@ class CreateUserView:
         self._error_label = ttk.Label(
             master=self._frame,
             textvariable=self._error_variable,
-            foreground='yellow'
+            foreground='orange'
         )
-        self._error_label.grid(padx=5, pady=5)
+        self._error_label.grid(row=1,column=0,padx=5, pady=5)
 
         self._initialize_username_field()
         self._initialize_password_field()

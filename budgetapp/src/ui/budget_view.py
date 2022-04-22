@@ -1,4 +1,4 @@
-from tkinter import ttk, constants
+from tkinter import ttk, constants, StringVar
 from service.budgetapp_service import budgetapp_service
 
 
@@ -134,6 +134,8 @@ class BudgetView:
         self._budget_list_view = None
         self._budget_list_frame = None
 
+        self._error_variable = None
+        self._error_label = None
         self._frame = None
 
         self._initialize()
@@ -154,7 +156,15 @@ class BudgetView:
 
     def _handle_update_value(self, value, new_amount):
 
-        # error for amount input needs to be added
+        try:
+            new_amount = float(new_amount) 
+            if new_amount <= 0:
+                self._show_error('Amount must be a positivie number')
+                return
+        except:
+            ValueError('Amount must be a positive number')
+            self._show_error('Amount must be a positive number')
+            return
 
         budgetapp_service.update_user_economy_value(value, new_amount)
         self._initialize_economy_list()
@@ -244,6 +254,13 @@ class BudgetView:
             pady=5,
             sticky=constants.EW
         )
+    
+    def _show_error(self, text):
+        self._error_variable.set(text)
+        self._error_label.grid()
+
+    def _hide_error(self):
+        self._error_label.grid_remove()
 
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)
@@ -269,5 +286,14 @@ class BudgetView:
             sticky=constants.W
         )
 
+        self._error_variable = StringVar(self._frame)
+        self._error_label = ttk.Label(
+            master=self._frame,
+            textvariable=self._error_variable,
+            foreground='orange'
+        )
+        
+        self._error_label.grid(row=1,column=0,padx=5, pady=5)
+        
         self._frame.grid_columnconfigure(0, weight=1, minsize=200)
         self._frame.grid_columnconfigure(1, weight=0)

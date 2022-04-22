@@ -42,14 +42,24 @@ class CreateBudgetView:
         self._amount_input.grid(padx=5, pady=5, sticky=constants.EW)
 
     def _create_budget_handler(self):
+        
         budgetname = self._budgetname_input.get()
         amount = self._amount_input.get()
+        
+        try:
+            amount = float(amount) 
+        except:
+            ValueError('Amount must be a positive number')
+            self._show_error('Amount must be a positive number')
+            return
 
         if len(budgetname) == 0:
             self._show_error('A name for the budget is required')
             return
 
-    # must create error for negative stuff
+        if float(amount) <= 0:
+            self._show_error('Amount must be a positivie number')
+            return
 
         budgetapp_service.create_budget(budgetname, amount)
         self._handle_show_budget_view()
@@ -88,9 +98,9 @@ class CreateBudgetView:
         self._error_label = ttk.Label(
             master=self._frame,
             textvariable=self._error_variable,
-            foreground='yellow'
+            foreground='orange'
         )
-        self._error_label.grid(padx=5, pady=5)
+        self._error_label.grid(row=1,column=0,padx=5, pady=5)
 
         self._initialize_header()
         self._initialize_budgetname_field()
