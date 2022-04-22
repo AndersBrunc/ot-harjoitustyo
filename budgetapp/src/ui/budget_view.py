@@ -31,8 +31,8 @@ class BudgetListView:
         delete_budget_button.grid(
             row=0,
             column=0,
-            padx=5,
-            pady=5,
+            padx=1,
+            pady=1,
             sticky=constants.W
         )
         item_frame.grid_columnconfigure(0, weight=1)

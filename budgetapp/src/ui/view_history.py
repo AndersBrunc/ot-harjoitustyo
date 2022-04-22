@@ -32,8 +32,8 @@ class PurchaseListView:
         delete_purchase_button.grid(
             row=0,
             column=1,
-            padx=5,
-            pady=5,
+            padx=1,
+            pady=1,
             sticky=constants.EW
         )
         item_frame.grid_columnconfigure(0, weight=1)

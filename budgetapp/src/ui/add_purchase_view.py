@@ -131,7 +131,7 @@ class AddPurchaseView:
             textvariable=self._error_variable,
             foreground='orange'
         )
-        self._error_label.grid(row=1,column=0,padx=5, pady=5)
+        self._error_label.grid(row=1,column=1,padx=5, pady=5)
 
         self._initialize_header()
         self._initialize_budget_selection()
