@@ -202,7 +202,7 @@ class BudgetappService:
             purchase_id: th id of the purchase
 
         '''
-        purchase = self._purchase_repository.find_by_id(purchase_id)
+        purchase = self._purchase_repository.find_by_id(purchase_id)[0]
         self._user.balance += purchase.amount
 
         self._user_repository.update_balance(self._user.balance,self._user.username)

@@ -73,8 +73,8 @@ class PurchaseRepository:
         '''
         cursor = self._connection.cursor()
         cursor.execute('select * from purchases where p_id=?',(p_id,))
-        purchase = cursor.fetchone()
-        return purchase
+        row = cursor.fetchone()
+        return list(map(get_purchase_by_row,row))
 
     def add_purchase(self, purchase):
         '''Saves a purchase in the purchase-database
