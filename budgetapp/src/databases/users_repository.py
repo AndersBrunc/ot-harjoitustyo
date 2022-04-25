@@ -3,7 +3,13 @@ from db_connection import get_database_connection
 
 
 def get_user_by_row(row):
-    return User(row['username'], row['password'], row['balance'], row['income'], row['expenses']) if row else None
+    return User(
+        row['username'],
+        row['password'],
+        row['balance'],
+        row['income'],
+        row['expenses']
+        ) if row else None
 
 
 class UserRepository:

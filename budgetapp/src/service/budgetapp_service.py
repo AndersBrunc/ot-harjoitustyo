@@ -153,7 +153,7 @@ class BudgetappService:
         )
         if login:
             self._user = user
-            print(f'set _user as {self._user}')
+
         return user
 
     def current_user(self):

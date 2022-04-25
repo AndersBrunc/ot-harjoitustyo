@@ -3,7 +3,13 @@ from db_connection import get_database_connection
 
 
 def get_budget_by_row(row):
-    return Budget(row['name'], row['username'], row['og_amount'], row['c_amount'], row['b_id']) if row else None
+    return Budget(
+        row['name'],
+        row['username'],
+        row['og_amount'],
+        row['c_amount'],
+        row['b_id']
+        ) if row else None
 
 
 class BudgetRepository:
