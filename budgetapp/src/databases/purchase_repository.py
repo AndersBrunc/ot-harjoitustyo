@@ -70,7 +70,7 @@ class PurchaseRepository:
 
     def find_by_id(self, p_id):
         '''Finds a specific purchase based on id
-            
+
             Args:
                 p_id: string, the purchase id
 

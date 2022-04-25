@@ -140,9 +140,8 @@ class BudgetappService:
             income = float(income)
             expenses = float(expenses)
 
-        except:
-            TypeError(
-                'The balance, income and expenses need to be posistive numbers')
+        except TypeError:
+            raise TypeError('The balance, income and expenses need to be posistive numbers')
 
         if balance < 0 or income < 0 or expenses < 0:
             raise NegativeInputError(
