@@ -3,7 +3,13 @@ from db_connection import get_database_connection
 
 
 def get_purchase_by_row(row):
-    return Purchase(row['category'], row['amount'], row['username'], row['comment'], row['p_id']) if row else None
+    return Purchase(
+        row['category'],
+        row['amount'],
+        row['username'],
+        row['comment'],
+        row['p_id']
+        ) if row else None
 
 
 class PurchaseRepository:
@@ -64,7 +70,7 @@ class PurchaseRepository:
 
     def find_by_id(self, p_id):
         '''Finds a specific purchase based on id
-
+            
             Args:
                 p_id: string, the purchase id
 
@@ -72,12 +78,10 @@ class PurchaseRepository:
                 Purchase object
         '''
         cursor = self._connection.cursor()
-        cursor.execute('select * from purchases where p_id=?', (p_id,))
+        cursor.execute('select * from purchases where p_id=?',(p_id,))
         rows = cursor.fetchall()
 
-        print(rows)
-
-        return list(map(get_purchase_by_row, rows))
+        return list(map(get_purchase_by_row,rows))
 
     def add_purchase(self, purchase):
         '''Saves a purchase in the purchase-database
