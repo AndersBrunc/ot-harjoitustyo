@@ -45,7 +45,7 @@ class AddPurchaseView:
     def _initialize_budget_selection(self):
         label = ttk.Label(master=self._frame,
                           text='Choose Budget that will be affected:')
-        label.grid(row=2, column=0, padx=5, pady=5, sticky=constants.W)
+        label.grid(row=3, column=0, padx=5, pady=5, sticky=constants.W)
 
         values = [budget.name for budget in self._budgets]
         self._budget_spinbox = ttk.Spinbox(
