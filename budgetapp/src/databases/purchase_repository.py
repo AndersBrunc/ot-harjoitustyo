@@ -64,7 +64,7 @@ class PurchaseRepository:
 
     def find_by_id(self, p_id):
         '''Finds a specific purchase based on id
-            
+
             Args:
                 p_id: string, the purchase id
 
@@ -72,9 +72,12 @@ class PurchaseRepository:
                 Purchase object
         '''
         cursor = self._connection.cursor()
-        cursor.execute('select * from purchases where p_id=?',(p_id,))
-        row = cursor.fetchone()
-        return list(map(get_purchase_by_row,row))
+        cursor.execute('select * from purchases where p_id=?', (p_id,))
+        rows = cursor.fetchall()
+
+        print(rows)
+
+        return list(map(get_purchase_by_row, rows))
 
     def add_purchase(self, purchase):
         '''Saves a purchase in the purchase-database

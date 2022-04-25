@@ -157,7 +157,7 @@ class BudgetView:
     def _handle_update_value(self, value, new_amount):
 
         try:
-            new_amount = float(new_amount) 
+            new_amount = float(new_amount)
             if new_amount <= 0:
                 self._show_error('Amount must be a positivie number')
                 return
@@ -256,7 +256,7 @@ class BudgetView:
             pady=5,
             sticky=constants.EW
         )
-    
+
     def _show_error(self, text):
         self._error_variable.set(text)
         self._error_label.grid()
@@ -294,8 +294,8 @@ class BudgetView:
             textvariable=self._error_variable,
             foreground='orange'
         )
-        
-        self._error_label.grid(row=1,column=0,padx=5, pady=5)
-        
+
+        self._error_label.grid(row=1, column=0, padx=5, pady=5)
+
         self._frame.grid_columnconfigure(0, weight=1, minsize=200)
         self._frame.grid_columnconfigure(1, weight=0)

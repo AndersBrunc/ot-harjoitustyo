@@ -205,7 +205,8 @@ class BudgetappService:
         purchase = self._purchase_repository.find_by_id(purchase_id)[0]
         self._user.balance += purchase.amount
 
-        self._user_repository.update_balance(self._user.balance,self._user.username)
+        self._user_repository.update_balance(
+            self._user.balance, self._user.username)
         self._purchase_repository.delete_one(purchase_id)
 
     def delete_budget(self, budget_id):

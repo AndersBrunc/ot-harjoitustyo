@@ -42,12 +42,12 @@ class CreateBudgetView:
         self._amount_input.grid(padx=5, pady=5, sticky=constants.EW)
 
     def _create_budget_handler(self):
-        
+
         budgetname = self._budgetname_input.get()
         amount = self._amount_input.get()
-        
+
         try:
-            amount = float(amount) 
+            amount = float(amount)
         except:
             ValueError('Amount must be a positive number')
             self._show_error('Amount must be a positive number')
@@ -100,7 +100,7 @@ class CreateBudgetView:
             textvariable=self._error_variable,
             foreground='orange'
         )
-        self._error_label.grid(row=1,column=0,padx=5, pady=5)
+        self._error_label.grid(row=1, column=0, padx=5, pady=5)
 
         self._initialize_header()
         self._initialize_budgetname_field()

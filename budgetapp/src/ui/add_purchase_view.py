@@ -45,7 +45,7 @@ class AddPurchaseView:
     def _initialize_budget_selection(self):
         label = ttk.Label(master=self._frame,
                           text='Choose Budget that will be affected:')
-        label.grid(row=2,column=0,padx=5, pady=5, sticky=constants.W)
+        label.grid(row=2, column=0, padx=5, pady=5, sticky=constants.W)
 
         values = [budget.name for budget in self._budgets]
         self._budget_spinbox = ttk.Spinbox(
@@ -100,9 +100,9 @@ class AddPurchaseView:
 
         if len(category) == 0:
             self._show_error('The purchase has to be categorized')
-        
+
         try:
-            amount = float(amount) 
+            amount = float(amount)
         except:
             ValueError('Amount must be a positive number')
             self._show_error('Amount must be a positive number')
@@ -131,7 +131,7 @@ class AddPurchaseView:
             textvariable=self._error_variable,
             foreground='orange'
         )
-        self._error_label.grid(row=1,column=1,padx=5, pady=5)
+        self._error_label.grid(row=1, column=1, padx=5, pady=5)
 
         self._initialize_header()
         self._initialize_budget_selection()
