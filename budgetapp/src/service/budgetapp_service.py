@@ -70,25 +70,20 @@ class BudgetappService:
                 string, represents the users comment on the purchase
         '''
 
-        try:
-            purchase_amount = float(amount)
-        except ValueError:
-            raise ValueError('purchase amount must be a positive number')
-
-        if purchase_amount < 0:
+        if amount < 0:
             raise NegativeInputError('The purchase amount must be positive')
 
-        purchase = Purchase(category, purchase_amount,
+        purchase = Purchase(category, amount,
                             self._user.username, comment)
 
         self._purchase_repository.add_purchase(purchase)
 
-        self._user.balance -= purchase_amount
+        self._user.balance -= amount
         self._user_repository.update_balance(
             self._user.balance, self._user.username)
 
         c_amount = self._budget_repository.find_by_id(budget_id).c_amount
-        c_amount -= purchase_amount
+        c_amount -= amount
 
         self._budget_repository.update_current_amount(c_amount, budget_id)
 
@@ -134,14 +129,6 @@ class BudgetappService:
 
         if is_username_taken:
             raise UsernameTakenError(f'The username {username} is taken')
-
-        try:
-            balance = float(balance)
-            income = float(income)
-            expenses = float(expenses)
-
-        except ValueError:
-            raise TypeError('The balance, income and expenses need to be posistive numbers')
 
         if balance < 0 or income < 0 or expenses < 0:
             raise NegativeInputError(
