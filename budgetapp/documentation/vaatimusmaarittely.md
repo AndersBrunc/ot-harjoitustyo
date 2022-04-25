@@ -5,7 +5,7 @@
 The application allows for the user to keep track of how much they can afford to spend each month, which helps them to become more aware of their purchases and choices.
 
 ## Base Functions
-
+### Before logging in
 - User can create an account by filling in some infromation:
   - username
   - password
@@ -13,8 +13,10 @@ The application allows for the user to keep track of how much they can afford to
   - monthly income (can be edited later)
   - monthly recurring payments such as rent (can be edited later)
 - User can log in to their account
-- User can create a monthly budget, which is then displayed on the home screen along with the user's total balance
-- User can input purchases, which decreases the budget amount displayed
+### While logged in
+- User can create a monthly budget, which is then displayed on the home screen along with the user's balance, income and expenses
+- The balance, income and expenses can be edited
+- User can input purchases, which decreases their balance and a chosen budget's amount
 - Purchase history can be viewed
 
 ## Possible future extensions
