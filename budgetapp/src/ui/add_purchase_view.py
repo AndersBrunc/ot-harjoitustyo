@@ -109,7 +109,7 @@ class AddPurchaseView:
             return
 
         if float(amount) <= 0:
-            self._show_error('Amount must be a positivie number')
+            self._show_error('Amount must be a positive number')
             return
 
         budgetapp_service.add_purchase(budget_id, amount, category, comment)
