@@ -72,8 +72,8 @@ class BudgetappService:
 
         try:
             purchase_amount = float(amount)
-        except:
-            raise TypeError('purchase amount must be a positive number')
+        except ValueError:
+            raise ValueError('purchase amount must be a positive number')
 
         if purchase_amount < 0:
             raise NegativeInputError('The purchase amount must be positive')
@@ -140,7 +140,7 @@ class BudgetappService:
             income = float(income)
             expenses = float(expenses)
 
-        except TypeError:
+        except ValueError:
             raise TypeError('The balance, income and expenses need to be posistive numbers')
 
         if balance < 0 or income < 0 or expenses < 0:
