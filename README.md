@@ -12,7 +12,7 @@ This app can be used to create a budget.
 
 - [Changelog](budgetapp/documentation/changelog.md)
 
-## Installment
+## Installation
 
 1. Install dependencies using the command:
 
@@ -32,4 +32,35 @@ poetry run invoke build
 poetry run invoke start
 ```
 
+## Commands
 
+### Run the program
+
+Run the program using:
+
+```bash
+poetry run invoke start
+```
+
+### Testing
+Run tests using:
+
+```bash
+poetry run invoke test
+```
+
+### Test Coverage
+
+Create a test coverage report to the _htmlcov_-folder using:
+
+```bash
+poetry run invoke coverage-report
+```
+
+### Pylint
+
+Execute a pylint-inspection based on the requirements specified in the [.pylintrc](./budgetapp/.pylintrc) -file:
+
+```bash
+poetry run invoke pylint
+```
