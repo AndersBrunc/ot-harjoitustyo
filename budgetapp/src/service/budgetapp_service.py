@@ -87,6 +87,8 @@ class BudgetappService:
 
         self._budget_repository.update_current_amount(c_amount, budget_id)
 
+        return purchase
+
     def login(self, username, password):
         '''Logs user in
 
