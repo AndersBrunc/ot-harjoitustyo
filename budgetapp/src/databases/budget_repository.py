@@ -9,7 +9,7 @@ def get_budget_by_row(row):
         row['og_amount'],
         row['c_amount'],
         row['b_id']
-        ) if row else None
+    ) if row else None
 
 
 class BudgetRepository:

@@ -37,7 +37,8 @@ def create_tables(connection):
             category text,
             amount float,
             username text,
-            comment text
+            comment text,
+            budget_id text
         );
     ''')
 

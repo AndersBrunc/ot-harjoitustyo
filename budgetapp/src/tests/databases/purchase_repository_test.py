@@ -2,17 +2,21 @@ import unittest
 from databases.purchase_repository import purchase_repository
 from entities.purchase import Purchase
 from entities.user import User
+from entities.budget import Budget
 
 
 class TestPurchaseRepository(unittest.TestCase):
     def setUp(self):
         purchase_repository.delete_all()
         self.user_mrtest = User('MrTest', 'test123', 1000, 500, 200)
-        self.purchase_a = Purchase('Food', 10, self.user_mrtest.username, '')
+        self.budget_test = Budget(
+            'Testbudget', self.user_mrtest.username, 100, 100)
+        self.purchase_a = Purchase(
+            self.budget_test.id, 'Food', 10, self.user_mrtest.username, '')
         self.purchase_b = Purchase(
-            'Food', 5.5, self.user_mrtest.username, 'Lidl')
+            self.budget_test.id, 'Food', 5.5, self.user_mrtest.username, 'Lidl')
         self.purchase_c = Purchase(
-            'Misc', 88, self.user_mrtest.username, 'random stuff')
+            self.budget_test.id, 'Misc', 80, self.user_mrtest.username, 'random stuff')
 
     def test_add_purchase(self):
         purchase_repository.add_purchase(self.purchase_a)

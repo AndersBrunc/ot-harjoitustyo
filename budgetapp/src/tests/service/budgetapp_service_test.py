@@ -134,12 +134,13 @@ class TestBudgetappService(unittest.TestCase):
         self.budget_a = Budget(
             'Budget_A', self.user_testuser.username, 200, 200)
         self.budget_b = Budget(
-            'Budget_A', self.user_testuser.username, 200, 200)
-        self.purchase_a = Purchase('Food', 10, self.user_testuser.username, '')
-        self.purchase_b = Purchase(
-            'Food', 5.5, self.user_testuser.username, 'Lidl')
-        self.purchase_c = Purchase(
-            'Misc', 88, self.user_testuser.username, 'random stuff')
+            'Budget_B', self.user_testuser.username, 100, 100)
+        self.purchase_a = Purchase(
+            self.budget_a.id, 'Food', 10, self.user_testuser.username, '')
+        self.purchase_b = Purchase(self.budget_a.id,
+                                   'Food', 5.5, self.user_testuser.username, 'Lidl')
+        self.purchase_c = Purchase(self.budget_b.id,
+                                   'Misc', 88, self.user_testuser.username, 'random stuff')
 
     def login_user(self, user):
         self.budgetapp_service.create_user(

@@ -73,7 +73,7 @@ class BudgetappService:
         if amount < 0:
             raise NegativeInputError('The purchase amount must be positive')
 
-        purchase = Purchase(category, amount,
+        purchase = Purchase(budget_id, category, amount,
                             self._user.username, comment)
 
         self._purchase_repository.add_purchase(purchase)
@@ -185,11 +185,16 @@ class BudgetappService:
         '''Deletes specific purchase and "gives the money back" to the user
 
         Args:
-            purchase_id: th id of the purchase
+            purchase_id: the id of the purchase
 
         '''
-        purchase = self._purchase_repository.find_by_id(purchase_id)[0]
+        purchase = self._purchase_repository.find_by_id(purchase_id)
         self._user.balance += purchase.amount
+
+        budget = self._budget_repository.find_by_id(purchase.budget_id)
+        budget.c_amount += purchase.amount
+        self._budget_repository.update_current_amount(
+            budget.c_amount, budget.id)
 
         self._user_repository.update_balance(
             self._user.balance, self._user.username)

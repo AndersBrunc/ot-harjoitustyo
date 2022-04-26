@@ -4,12 +4,13 @@ from db_connection import get_database_connection
 
 def get_purchase_by_row(row):
     return Purchase(
+        row['budget_id'],
         row['category'],
         row['amount'],
         row['username'],
         row['comment'],
         row['p_id']
-        ) if row else None
+    ) if row else None
 
 
 class PurchaseRepository:
@@ -78,10 +79,10 @@ class PurchaseRepository:
                 Purchase object
         '''
         cursor = self._connection.cursor()
-        cursor.execute('select * from purchases where p_id=?',(p_id,))
+        cursor.execute('select * from purchases where p_id=?', (p_id,))
         rows = cursor.fetchall()
 
-        return list(map(get_purchase_by_row,rows))
+        return list(map(get_purchase_by_row, rows))[0]
 
     def add_purchase(self, purchase):
         '''Saves a purchase in the purchase-database
@@ -91,12 +92,13 @@ class PurchaseRepository:
         '''
         cursor = self._connection.cursor()
         cursor.execute(
-            'insert into purchases (p_id,category,amount,username,comment) values (?,?,?,?,?)',
+            'insert into purchases (p_id,category,amount,username,comment,budget_id) values (?,?,?,?,?,?)',
             (purchase.id,
              purchase.category,
              purchase.amount,
              purchase.username,
-             purchase.comment)
+             purchase.comment,
+             purchase.budget_id)
         )
         self._connection.commit()
 

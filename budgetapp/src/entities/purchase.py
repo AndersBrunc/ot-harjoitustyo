@@ -5,6 +5,7 @@ class Purchase:
     '''Class for purchases
 
     Attributes:
+        budget_id: string, represents the budget affected by the purchase
         category: string, represents the purchased item(s) category
         amount: float, represents the receipt amount
         username: string, represnts users username
@@ -14,10 +15,11 @@ class Purchase:
         p_id: string, represents purchase-id
     '''
 
-    def __init__(self, category, amount, username, comment, p_id=None):
+    def __init__(self, budget_id, category, amount, username, comment, p_id=None):
         '''Class constructor, creates a purchase
 
         Args:
+            budget_id: string, represents the budget affected by the purchase
             category: string, represents the purchased item(s) category
             amount: float, represents the receipt amount
             username: string, represnts users username
@@ -33,3 +35,4 @@ class Purchase:
         self.amount = amount
         self.username = username
         self.comment = comment
+        self.budget_id = budget_id

@@ -9,7 +9,7 @@ def get_user_by_row(row):
         row['balance'],
         row['income'],
         row['expenses']
-        ) if row else None
+    ) if row else None
 
 
 class UserRepository:
