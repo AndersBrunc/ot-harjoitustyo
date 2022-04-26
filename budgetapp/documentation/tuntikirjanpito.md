@@ -16,4 +16,5 @@
 | 19.4| 13   | ui, ui error fixes and function testing|
 | 20.4| 4    | more ui|
 | 21.4| 4    | ui testing|
-| tot | 77   | |
+| 25.4| 3    | ui, modifications, documentation| 
+| tot | 80   | |
