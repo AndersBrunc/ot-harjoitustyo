@@ -91,8 +91,10 @@ class PurchaseRepository:
 
         '''
         cursor = self._connection.cursor()
+
         cursor.execute(
-            'insert into purchases (p_id,category,amount,username,comment,budget_id) values (?,?,?,?,?,?)',
+            '''insert into purchases
+            (p_id,category,amount,username,comment,budget_id) values (?,?,?,?,?,?)''',
             (purchase.id,
              purchase.category,
              purchase.amount,
