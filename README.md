@@ -1,6 +1,6 @@
 # **BudgetApp**
 
-This app can be used to create a budget.
+This app can be used to create a budget and keep track of purchases.
 
 ## Documentation
 
