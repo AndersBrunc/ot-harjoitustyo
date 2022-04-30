@@ -12,6 +12,8 @@ This app can be used to create a budget and keep track of purchases.
 
 - [Changelog](budgetapp/documentation/changelog.md)
 
+- [Release](https://github.com/NaND3R5/ot-harjoitustyo/releases/tag/viikko5)
+
 ## Installation
 
 1. Install dependencies using the command:
