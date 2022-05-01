@@ -39,7 +39,7 @@ class BudgetRepository:
         cursor = self._connection.cursor()
         cursor.execute(
             'insert into budgets (b_id,name,username,og_amount,c_amount) values (?,?,?,?,?)',
-            (budget.id,budget.name, budget.username,
+            (budget.id, budget.name, budget.username,
              budget.og_amount, budget.c_amount)
         )
         self._connection.commit()
@@ -74,7 +74,7 @@ class BudgetRepository:
 
     def find_by_id(self, b_id):
         '''Finds budget based on it's id
-        
+
         Args:
             b_id: the budget-id the search is based on
 
@@ -118,5 +118,6 @@ class BudgetRepository:
         cursor.execute(
             'update budgets set c_amount = ? where b_id = ?', (new, b_id))
         self._connection.commit()
+
 
 budget_repository = BudgetRepository(get_database_connection())

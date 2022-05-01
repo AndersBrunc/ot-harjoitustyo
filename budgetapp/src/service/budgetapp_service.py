@@ -35,7 +35,7 @@ class BudgetappService:
         user_repository=default_user_repository
     ):
         '''The constructor of the class, creates a new service session
-        
+
         Args:
             purchase_repository:
                 Optional, defaults to PurchaseRepository-object
@@ -212,7 +212,7 @@ class BudgetappService:
             budget = self._budget_repository.find_by_id(purchase.budget_id)
             budget.c_amount += purchase.amount
             self._budget_repository.update_current_amount(
-            budget.c_amount, budget.id)
+                budget.c_amount, budget.id)
         except:
             IndexError('Budget does not excist')
             pass

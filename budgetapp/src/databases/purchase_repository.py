@@ -125,7 +125,7 @@ class PurchaseRepository:
     def delete_all(self):
         '''Deletes all purchases
         '''
-        
+
         cursor = self._connection.cursor()
         cursor.execute('delete from purchases')
         self._connection.commit()
