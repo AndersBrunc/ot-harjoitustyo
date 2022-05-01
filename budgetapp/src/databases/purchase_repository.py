@@ -47,6 +47,7 @@ class PurchaseRepository:
             The list of purchases as Purchase-objects if in existance, otherwhise None
 
         '''
+
         all_purchases = self.fetch_all()
         new = filter(
             lambda purchase: purchase and purchase.username == username,
@@ -62,6 +63,7 @@ class PurchaseRepository:
             Returns:
                 Purchase-objects in list
         '''
+
         user_purchases = self.find_by_username(username)
         categorized = filter(
             lambda purchase: purchase and purchase.category == category,
@@ -78,6 +80,7 @@ class PurchaseRepository:
             Returns:
                 Purchase object
         '''
+
         cursor = self._connection.cursor()
         cursor.execute('select * from purchases where p_id=?', (p_id,))
         rows = cursor.fetchall()
@@ -90,6 +93,7 @@ class PurchaseRepository:
             purchase: Purchase-object that will be saved
 
         '''
+
         cursor = self._connection.cursor()
 
         cursor.execute(
@@ -113,6 +117,7 @@ class PurchaseRepository:
             p_id: id of the deleted purchase
 
         '''
+
         cursor = self._connection.cursor()
         cursor.execute('delete from purchases where p_id = ?', (p_id,))
         self._connection.commit()
@@ -120,6 +125,7 @@ class PurchaseRepository:
     def delete_all(self):
         '''Deletes all purchases
         '''
+        
         cursor = self._connection.cursor()
         cursor.execute('delete from purchases')
         self._connection.commit()

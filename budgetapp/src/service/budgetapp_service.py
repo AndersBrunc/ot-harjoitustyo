@@ -34,7 +34,19 @@ class BudgetappService:
         budget_repository=default_budget_repository,
         user_repository=default_user_repository
     ):
-        '''The constructor of the class, creates a new service session'''
+        '''The constructor of the class, creates a new service session
+        
+        Args:
+            purchase_repository:
+                Optional, defaults to PurchaseRepository-object
+                Object, that represents the purchase repository
+            budget_repository:
+                Optional, defaults to BudgetRepository-object
+                Object, that represents the budget repository
+            user_repository:
+                Optional, defaults to UserRepository-object
+                Object, that represents the user repository
+        '''
 
         self._user = None
         self._purchase_repository = purchase_repository
@@ -68,6 +80,10 @@ class BudgetappService:
             comment:
                 optinal, defaults to empty string "".
                 string, represents the users comment on the purchase
+
+        Returns:
+            the addded purchase as Purchase-object
+
         '''
 
         if amount < 0:
@@ -192,11 +208,14 @@ class BudgetappService:
         '''
         purchase = self._purchase_repository.find_by_id(purchase_id)
         self._user.balance += purchase.amount
-
-        budget = self._budget_repository.find_by_id(purchase.budget_id)
-        budget.c_amount += purchase.amount
-        self._budget_repository.update_current_amount(
+        try:
+            budget = self._budget_repository.find_by_id(purchase.budget_id)
+            budget.c_amount += purchase.amount
+            self._budget_repository.update_current_amount(
             budget.c_amount, budget.id)
+        except:
+            IndexError('Budget does not excist')
+            pass
 
         self._user_repository.update_balance(
             self._user.balance, self._user.username)

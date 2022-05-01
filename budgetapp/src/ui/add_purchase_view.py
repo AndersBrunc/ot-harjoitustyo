@@ -93,13 +93,20 @@ class AddPurchaseView:
         budget_name = self._budget_spinbox.get()
         budget = filter(lambda budget: budget.name ==
                         budget_name, self._budgets)
-        budget_id = list(budget)[0].id
+        try:
+            budget_id = list(budget)[0].id
+        except:
+            IndexError(f'You do not have a budget named {budget_name}')
+            self._show_error(f'You do not have a budget named {budget_name}')
+            return
+
         category = self._category_spinbox.get()
         amount = self._amount_input.get()
         comment = self._comment_input.get()
 
         if len(category) == 0:
             self._show_error('The purchase has to be categorized')
+            return
 
         try:
             amount = float(amount)
@@ -110,6 +117,10 @@ class AddPurchaseView:
 
         if float(amount) <= 0:
             self._show_error('Amount must be a positive number')
+            return
+
+        if amount > self._user.balance:
+            self._show_error('The purchase amount exceeds your balance')
             return
 
         budgetapp_service.add_purchase(budget_id, amount, category, comment)

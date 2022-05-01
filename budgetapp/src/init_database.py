@@ -24,11 +24,11 @@ def create_tables(connection):
     ''')
     cursor.execute('''
         create table budgets (
-            name text primary key,
+            b_id text primary key,
+            name text,
             username text,
             og_amount float,
-            c_amount float,
-            b_id text
+            c_amount float
         );
     ''')
     cursor.execute('''
