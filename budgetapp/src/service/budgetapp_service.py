@@ -213,9 +213,8 @@ class BudgetappService:
             budget.c_amount += purchase.amount
             self._budget_repository.update_current_amount(
                 budget.c_amount, budget.id)
-        except:
+        except IndexError:
             IndexError('Budget does not excist')
-            pass
 
         self._user_repository.update_balance(
             self._user.balance, self._user.username)
