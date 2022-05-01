@@ -68,7 +68,7 @@ class FakeBudgetRepository:
         )
         return list(budgets)[0]
 
-    def create_budget(self, budget):
+    def add_budget(self, budget):
         self.budgets.append(budget)
         return budget
 
@@ -96,7 +96,7 @@ class FakePurchaseRepository:
 
     def find_by_username(self, username):
         user_purchases = filter(
-            lambda purchase: purchase.user and purchase.username == username,
+            lambda purchase: purchase and purchase.username == username,
             self.purchases
         )
         return list(user_purchases)
@@ -109,6 +109,10 @@ class FakePurchaseRepository:
         )
 
         return list(categorized)
+
+    def find_by_id(self, p_id):
+        specific = filter(lambda p: p and p.id == p_id, self.purchases)
+        return list(specific)[0]
 
     def add_purchase(self, purchase):
         self.purchases.append(purchase)
@@ -130,11 +134,11 @@ class TestBudgetappService(unittest.TestCase):
             FakeBudgetRepository(),
             FakeUserRepository()
         )
-        self.user_testuser = User('Testuser', 'test123', 1000, 500, 200)
+        self.user_testuser = User('Testuser', 'test123', 1000.0, 500.0, 200.0)
         self.budget_a = Budget(
-            'Budget_A', self.user_testuser.username, 200, 200)
+            'Budget_A', self.user_testuser.username, 200.0, 200.0)
         self.budget_b = Budget(
-            'Budget_B', self.user_testuser.username, 100, 100)
+            'Budget_B', self.user_testuser.username, 100.0, 100.0)
         self.purchase_a = Purchase(
             self.budget_a.id, 'Food', 10, self.user_testuser.username, '')
         self.purchase_b = Purchase(self.budget_a.id,
@@ -150,6 +154,10 @@ class TestBudgetappService(unittest.TestCase):
             user.income,
             user.expenses
         )
+    def test_logout(self):
+        self.login_user(self.user_testuser)
+        self.budgetapp_service.logout()
+        self.assertEqual(self.budgetapp_service.current_user(),None)
 
     def test_login_success_with_correct_credentials(self):
         self.budgetapp_service.create_user(
@@ -209,3 +217,100 @@ class TestBudgetappService(unittest.TestCase):
             UsernameTakenError,
             lambda: self.budgetapp_service.create_user(username, '4', 3, 2, 1)
         )
+
+    def test_update_values(self):
+        self.login_user(self.user_testuser)
+        current = self.budgetapp_service.current_user()
+        new_balance = 2000
+        new_income = 1000
+        new_expenses = 500
+
+        self.budgetapp_service.update_user_economy_value('Balance',new_balance)
+        self.budgetapp_service.update_user_economy_value('Income',new_income)
+        self.budgetapp_service.update_user_economy_value('Expenses',new_expenses)
+
+        updated_user = self.budgetapp_service.fetch_all_users()[0]
+
+        self.assertEqual(current.balance, new_balance)
+        self.assertEqual(current.income, new_income)
+        self.assertEqual(current.expenses, new_expenses)
+        self.assertEqual(str(updated_user.balance),'2000')
+        self.assertEqual(str(updated_user.income),'1000')
+        self.assertEqual(str(updated_user.expenses),'500')
+    
+    def test_create_user_negative_values_raises_error(self):
+
+        self.assertRaises(
+            NegativeInputError,
+            lambda: self.budgetapp_service.create_user('a','a',-1,1,1))
+        self.assertRaises(
+            NegativeInputError,
+            lambda: self.budgetapp_service.create_user('a','a',1,-1,1))
+        self.assertRaises(
+            NegativeInputError,
+            lambda: self.budgetapp_service.create_user('a','a',1,1,-1))
+        
+    def test_create_negative_budget_raises_error(self):
+        self.login_user(self.user_testuser)
+        self.assertRaises(
+            NegativeInputError,
+            lambda: self.budgetapp_service.create_budget('bad',-100)
+        )
+    
+    def test_add_negative_purchase_raises_error(self):
+        self.assertRaises(
+            NegativeInputError,
+            lambda: self.budgetapp_service.add_purchase('1',-123,'nope','')
+        )
+
+    def test_add_purchase_reduces_user_balance_and_budget(self):
+        self.login_user(self.user_testuser)
+        current = self.budgetapp_service.current_user()
+        budget = self.budgetapp_service.create_budget(
+            self.budget_a.name,
+            self.budget_a.og_amount
+        )
+        purchase = self.purchase_a
+
+
+        self.budgetapp_service.add_purchase(
+            budget.id,
+            purchase.amount,
+            purchase.category,
+            purchase.comment
+        )
+
+        updated_budget = self.budgetapp_service.fetch_user_budgets()[0]
+        updated_user = self.budgetapp_service.fetch_all_users()[0]
+        all_purchases = self.budgetapp_service.fetch_user_purchases()
+        
+        self.assertEqual(len(all_purchases),1)
+        self.assertEqual(str(current.balance), '990.0')
+        self.assertEqual(str(updated_user.balance),'990.0')
+        self.assertEqual(str(updated_budget.c_amount),'190.0')
+
+
+    def test_delete_purchase_updates_users_balance_and_budget_current_amount(self):
+        self.login_user(self.user_testuser)
+        current = self.budgetapp_service.current_user()
+
+        budget = self.budgetapp_service.create_budget(
+            self.budget_a.name,
+            self.budget_a.og_amount
+        )
+        purchase = self.budgetapp_service.add_purchase(
+            budget.id,
+            self.purchase_a.amount,
+            self.purchase_a.category,
+            self.purchase_a.comment
+        )
+
+        self.budgetapp_service.delete_purchase(purchase.id)
+
+        updated_budget = self.budgetapp_service.fetch_user_budgets()[0]
+        updated_user = self.budgetapp_service.fetch_all_users()[0]
+
+        self.assertEqual(str(current.balance), '1000.0')
+        self.assertEqual(str(updated_user.balance),'1000.0')
+        self.assertEqual(str(updated_budget.c_amount),'200.0')
+

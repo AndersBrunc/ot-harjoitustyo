@@ -64,6 +64,9 @@ class BudgetappService:
         Returns:
             budget as Budget-object
         '''
+        if amount < 0:
+            raise NegativeInputError('The purchase amount must be positive')
+            
         budget = Budget(name=name, username=self._user.username,
                         og_amount=amount, c_amount=amount)
 

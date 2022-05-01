@@ -42,6 +42,11 @@ class TestPurchaseRepository(unittest.TestCase):
 
         self.assertEqual(purchases[0].username, self.purchase_a.username)
 
+    def test_find_by_id(self):
+        purchase_repository.add_purchase(self.purchase_a)
+        purchase = purchase_repository.find_by_id(self.purchase_a.id)
+        self.assertEqual(purchase.id, self.purchase_a.id)
+
     def test_find_by_category(self):
         purchase_repository.add_purchase(self.purchase_a)
         purchase_repository.add_purchase(self.purchase_b)
