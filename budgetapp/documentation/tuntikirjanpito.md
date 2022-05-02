@@ -19,4 +19,5 @@
 | 25.4| 3    | ui, modifications, documentation|
 | 26.4| 3    | small changes, documentation|
 | 1.5 | 3    | docstring, more tests |
-| tot | 86   | |
+| 2.5 | 3    | documentation |
+| tot | 89   | |
