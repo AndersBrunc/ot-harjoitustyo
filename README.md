@@ -4,6 +4,8 @@ This app can be used to create a budget and keep track of purchases.
 
 ## Documentation
 
+- [Manual](budgetapp/documentation/kayttoohje.md)
+
 - [Specification of Requirements](budgetapp/documentation/vaatimusmaarittely.md)
 
 - [Architecture](budgetapp/documentation/arkkitehtuuri.md)
