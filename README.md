@@ -10,6 +10,8 @@ This app can be used to create a budget and keep track of purchases.
 
 - [Architecture](budgetapp/documentation/arkkitehtuuri.md)
 
+- [Testing](budgetapp/documentation/testaus.md)
+
 - [Work accounting](budgetapp/documentation/tuntikirjanpito.md)
 
 - [Changelog](budgetapp/documentation/changelog.md)
