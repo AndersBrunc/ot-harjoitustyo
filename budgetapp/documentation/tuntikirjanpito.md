@@ -20,4 +20,5 @@
 | 26.4| 3    | small changes, documentation|
 | 1.5 | 3    | docstring, more tests |
 | 2.5 | 3    | documentation |
-| tot | 89   | |
+| 3.5 | 2    | documentation |
+| tot | 91   | |
