@@ -56,7 +56,9 @@ poetry run invoke test
 ### Test Coverage
 
 Create a test coverage report to the _htmlcov_-folder using:
-
+```bash
+poetry run invoke coverage
+```
 ```bash
 poetry run invoke coverage-report
 ```
