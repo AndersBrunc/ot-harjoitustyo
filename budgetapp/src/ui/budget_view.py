@@ -159,7 +159,7 @@ class BudgetView:
         try:
             new_amount = float(new_amount)
             if new_amount <= 0:
-                self._show_error('Amount must be a positivie number')
+                self._show_error('Amount must be a positive number')
                 return
         except:
             ValueError('Amount must be a positive number')

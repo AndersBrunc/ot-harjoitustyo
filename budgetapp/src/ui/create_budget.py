@@ -58,7 +58,7 @@ class CreateBudgetView:
             return
 
         if float(amount) <= 0:
-            self._show_error('Amount must be a positivie number')
+            self._show_error('Amount must be a positive number')
             return
 
         budgetapp_service.create_budget(budgetname, amount)
