@@ -16,7 +16,10 @@ respectively. The name of the test-database is determined and configured by the 
 
 ### Test coverage
 
+By excluding the files that handle the user interface, the branch coverage is 95%:
+
 ![Coverageresult](./pictures/coverage_report.png)
+
 
 ## System testing
 
