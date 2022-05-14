@@ -21,4 +21,5 @@
 | 1.5 | 3    | docstring, more tests |
 | 2.5 | 3    | documentation |
 | 3.5 | 2    | documentation |
-| tot | 91   | |
+| 14.5| 1    | docstring |
+| tot | 92   | |
