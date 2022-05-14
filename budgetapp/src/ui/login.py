@@ -3,8 +3,16 @@ from service.budgetapp_service import budgetapp_service, InvalidCredentialsError
 
 
 class LoginView:
-
+    """Class of the login view
+    """
     def __init__(self, root, handle_login, handle_show_create_user_view):
+        """Class constructor
+
+            Args:
+                root: Tk-object, represents the window
+                handle_login: reference to method for switching view to home view
+                handle_show_create_user_view: reference to method for switching view to create user view
+        """
         self._root = root
         self._handle_login = handle_login
         self._handle_show_create_user_view = handle_show_create_user_view
@@ -17,12 +25,18 @@ class LoginView:
         self._initialize()
 
     def pack(self):
+        """Packs the frame
+        """
         self._frame.pack(fill=constants.X)
 
     def destroy(self):
+        """Destroys the frame
+        """
         self._frame.destroy()
 
     def _initialize_username_field(self):
+        """Initializes username input field
+        """
         label = ttk.Label(master=self._frame, text='Username')
         self._username_input = ttk.Entry(master=self._frame)
 
@@ -30,6 +44,8 @@ class LoginView:
         self._username_input.grid(padx=5, pady=10, sticky=constants.EW)
 
     def _initialize_password_field(self):
+        """Initializes password input field
+        """
         label = ttk.Label(master=self._frame, text='Password')
         self._password_input = ttk.Entry(master=self._frame)
 
@@ -37,6 +53,8 @@ class LoginView:
         self._password_input.grid(padx=5, pady=10, sticky=constants.EW)
 
     def _login_handler(self):
+        """If valid credentials, logs user in
+        """
         username = self._username_input.get()
         password = self._password_input.get()
 
@@ -47,13 +65,24 @@ class LoginView:
             self._show_error('Invalid username or password')
 
     def _show_error(self, text):
+        """Shows error message
+
+            Args:
+                text: string, the error message
+
+        """
         self._error_variable.set(text)
         self._error_label.grid()
 
     def _hide_error(self):
+        """Hides error message
+        """
         self._error_label.grid_remove()
 
     def _initialize(self):
+        """Initializes all class-components/window features
+        """
+        
         self._frame = ttk.Frame(master=self._root)
 
         self._error_variable = StringVar(self._frame)

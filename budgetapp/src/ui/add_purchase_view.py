@@ -1,9 +1,17 @@
 from tkinter import ttk, constants, StringVar
-from service.budgetapp_service import budgetapp_service, NegativeInputError
+from service.budgetapp_service import budgetapp_service
 
 
 class AddPurchaseView:
+    """Class of the add purchase view
+    """
     def __init__(self, root, handle_show_budget_view):
+        """Class constructor
+            Args:
+                root: Tk-object, represents the window
+                handle_show_budget_view: reference to method that switches view to the home view
+
+        """
         self._root = root
         self._handle_show_budget_view = handle_show_budget_view
         self._frame = None
@@ -23,12 +31,18 @@ class AddPurchaseView:
         self._initialize()
 
     def pack(self):
+        """Packs the frame
+        """
         self._frame.pack(fill=constants.X)
 
     def destroy(self):
+        """Destroys the frame
+        """
         self._frame.destroy()
 
     def _initialize_header(self):
+        """Initializes the header of the frame
+        """
         user_label = ttk.Label(
             master=self._frame,
             text=f'Logged in as {self._user.username}'
@@ -43,6 +57,8 @@ class AddPurchaseView:
                                 pady=2, sticky=constants.E)
 
     def _initialize_budget_selection(self):
+        """Initializes the input field/scrollbar for the budget name
+        """
         label = ttk.Label(master=self._frame,
                           text='Choose Budget that will be affected:')
         label.grid(row=3, column=0, padx=5, pady=5, sticky=constants.W)
@@ -59,6 +75,8 @@ class AddPurchaseView:
             row=3, column=1, padx=5, pady=5, sticky=constants.W)
 
     def _intitialize_category_selection(self):
+        """Initializes the input field/scrollbar for the purchase category
+        """
         label = ttk.Label(master=self._frame, text='Choose Category:')
         label.grid(padx=5, pady=5, sticky=constants.W)
 
@@ -74,6 +92,8 @@ class AddPurchaseView:
             row=4, column=1, padx=5, pady=5, sticky=constants.W)
 
     def _initialize_amount_field(self):
+        """Initializes amount input field
+        """
         label = ttk.Label(master=self._frame, text='Receipt amount (€):')
         self._amount_input = ttk.Entry(master=self._frame)
 
@@ -82,6 +102,8 @@ class AddPurchaseView:
                                 pady=5, sticky=constants.EW)
 
     def _initialize_comment_field(self):
+        """Initializes comment input field
+        """
         label = ttk.Label(master=self._frame, text='Comment:')
         self._comment_input = ttk.Entry(master=self._frame)
 
@@ -90,6 +112,8 @@ class AddPurchaseView:
             row=6, column=1, padx=5, pady=5, sticky=constants.EW)
 
     def _add_purchase_handler(self):
+        """If conditions are met, adds a purchase to the users history
+        """
         budget_name = self._budget_spinbox.get()
         budget = filter(lambda budget: budget.name ==
                         budget_name, self._budgets)
@@ -127,13 +151,23 @@ class AddPurchaseView:
         self._handle_show_budget_view()
 
     def _show_error(self, text):
+        """Shows error message
+
+            Args:
+                text: string, the error message
+
+        """
         self._error_variable.set(text)
         self._error_label.grid()
 
     def _hide_error(self):
+        """Hides error message
+        """
         self._error_label.grid_remove()
 
     def _initialize(self):
+        """Initializes all class components/window features
+        """
         self._frame = ttk.Frame(master=self._root)
 
         self._error_variable = StringVar(self._frame)

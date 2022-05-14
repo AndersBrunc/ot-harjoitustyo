@@ -3,7 +3,16 @@ from service.budgetapp_service import budgetapp_service
 
 
 class BudgetListView:
+    """Class of the list of user's budgets
+    """
     def __init__(self, root, budgets, handle_delete_one):
+        """Class constructor
+            Args:
+                root: ttk.Frame, represents the window frame
+                budgets: list, list of Budget-objects
+                handle_delete_one: reference to method that deletes one budget
+                
+        """
         self._root = root
         self._budgets = budgets
         self._handle_delete_one_budget = handle_delete_one
@@ -12,12 +21,18 @@ class BudgetListView:
         self._initialize()
 
     def pack(self):
+        """Packs the frame
+        """
         self._frame.pack(fill=constants.X)
 
     def destroy(self):
+        """Destroys the frame
+        """
         self._frame.destroy()
 
     def _initialize_budget_item(self, budget):
+        """Initializes the budget-items witch delete button attached
+        """
         item_frame = ttk.Frame(master=self._frame)
         label = ttk.Label(master=item_frame,
                           text=f'{budget.name}: {budget.c_amount} € left')
@@ -39,6 +54,8 @@ class BudgetListView:
         item_frame.pack(fill=constants.X)
 
     def _initialize(self):
+        """Initializes the list of budget-items
+        """
         self._frame = ttk.Frame(master=self._root)
 
         for budget in self._budgets:
@@ -46,7 +63,15 @@ class BudgetListView:
 
 
 class EconomyListView:
+    """Class of the list of users economic stats
+    """
     def __init__(self, root, handle_update_value):
+        """Class constructor
+            Args:
+                root: ttk.Frame, represents the window frame
+                handle_update_value: reference to method that updates one of the economic values
+
+        """
         self._root = root
         self._handle_update_value = handle_update_value
         self._user = budgetapp_service.current_user()
@@ -58,12 +83,18 @@ class EconomyListView:
         self._initialize()
 
     def pack(self):
+        """Packs the frame
+        """
         self._frame.pack(fill=constants.X)
 
     def destroy(self):
+        """Destroys the frame
+        """
         self._frame.destroy()
 
     def _initialize_list_items(self):
+        """Initializes the items in the economic list
+        """
         balance_label = ttk.Label(
             master=self._frame,
             text=f'Balance: {self._user.balance} €'
@@ -81,7 +112,8 @@ class EconomyListView:
         expenses_label.grid(padx=5, pady=5, sticky=constants.EW)
 
     def _initialize_footer(self):
-
+        """Initializes list footer
+        """
         update_label = ttk.Label(
             master=self._frame, text='Choose Value to update:')
         update_label.grid(padx=5, pady=5, sticky=constants.EW)
@@ -114,13 +146,26 @@ class EconomyListView:
         update_button.grid(padx=5, pady=5, sticky=constants.EW)
 
     def _initialize(self):
+        """Initializes list of the economic values and the footer
+        """
         self._frame = ttk.Frame(master=self._root)
         self._initialize_list_items()
         self._initialize_footer()
 
 
 class BudgetView:
+    """Class of the home screen/ budget view
+    """
     def __init__(self, root, handle_logout, handle_show_purchases, handle_create_budget, handle_show_add_purchase):
+        """Class constructor
+        
+            Args:
+                root: Tk-object, represents the window
+                handle_logout: reference to method that switches the view to the login view
+                handle_show_purchases: reference to method that switches the view to the purchase history view
+                handle_create_budget: reference to method that switches the view to the create budget view
+                handle_show_add_purchase: reference to method that switches the view to the add purchase view
+        """
         self._root = root
         self._handle_logout = handle_logout
         self._handle_show_purchases = handle_show_purchases
@@ -141,21 +186,30 @@ class BudgetView:
         self._initialize()
 
     def pack(self):
+        """Packs the frame
+        """
         self._frame.pack(fill=constants.X)
 
     def destroy(self):
+        """Destroys the frame
+        """
         self._frame.destroy()
 
     def _logout_handler(self):
+        """Logs user out upon button press
+        """
         budgetapp_service.logout()
         self._handle_logout()
 
     def _handle_delete_one_budget(self, budget_id):
+        """Deletes a budget upon button press
+        """
         budgetapp_service.delete_budget(budget_id)
         self._initialize_budget_list()
 
     def _handle_update_value(self, value, new_amount):
-
+        """If conditions are met, updates a specified economy value of the user
+        """
         try:
             new_amount = float(new_amount)
             if new_amount <= 0:
@@ -170,6 +224,8 @@ class BudgetView:
         self._initialize_economy_list()
 
     def _initialize_economy_list(self):
+        """Initializes the list of the user's balance, income and expenses
+        """
         if self._economy_list_view:
             self._economy_list_view.destroy()
 
@@ -180,6 +236,8 @@ class BudgetView:
         self._economy_list_view.pack()
 
     def _initialize_budget_list(self):
+        """Initializes the list of the user's budgets
+        """
         if self._budget_list_view:
             self._budget_list_view.destroy()
 
@@ -194,6 +252,8 @@ class BudgetView:
         self._budget_list_view.pack()
 
     def _initialize_header(self):
+        """Initializes the header of the frame
+        """
         user_label = ttk.Label(
             master=self._frame,
             text=f'Logged in as {self._user.username}'
@@ -218,6 +278,8 @@ class BudgetView:
         )
 
     def _initialize_footer(self):
+        """Initializes the footer of the frame
+        """
         create_budget_button = ttk.Button(
             master=self._frame,
             text='Create Budget',
@@ -258,13 +320,23 @@ class BudgetView:
         )
 
     def _show_error(self, text):
+        """Shows error message
+
+            Args:
+                text: string, the error message
+
+        """
         self._error_variable.set(text)
         self._error_label.grid()
 
     def _hide_error(self):
+        """Hides error message
+        """
         self._error_label.grid_remove()
 
     def _initialize(self):
+        """Initializes all class components/window features
+        """
         self._frame = ttk.Frame(master=self._root)
         self._budget_list_frame = ttk.Frame(master=self._frame)
         self._economy_list_frame = ttk.Frame(master=self._frame)

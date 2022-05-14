@@ -3,7 +3,17 @@ from service.budgetapp_service import budgetapp_service
 
 
 class PurchaseListView:
+    """Class of the list of purchases
+    """
     def __init__(self, root, purchases, handle_delete_one):
+        """Class constructor
+        
+            Args:
+                root: ttk.Frame, represents the frame of the window
+                purchases: list, list of users Purchase-objects
+                handle_delete_one: reference to method that deletes one purchase
+
+        """
         self._root = root
         self._purchases = purchases
         self._handle_delete_one = handle_delete_one
@@ -12,12 +22,18 @@ class PurchaseListView:
         self._initialize()
 
     def pack(self):
+        """Packs the frame
+        """
         self._frame.pack(fill=constants.X)
 
     def destroy(self):
+        """Destroys the frame
+        """
         self._frame.destroy()
 
     def _initialize_purchase_item(self, purchase):
+        """Inititalizes a purchase item with a delete button attached
+        """
         item_frame = ttk.Frame(master=self._frame)
         label = ttk.Label(
             master=item_frame,
@@ -40,6 +56,8 @@ class PurchaseListView:
         item_frame.pack(fill=constants.X)
 
     def _initialize(self):
+        """Initializes the list of purchase-items
+        """
         self._frame = ttk.Frame(master=self._root)
 
         for purchase in self._purchases:
@@ -47,7 +65,15 @@ class PurchaseListView:
 
 
 class PurchaseView:
+    """Class of the purchase history view
+    """
     def __init__(self, root, handle_show_budget_view):
+        """Class constructor
+        
+            Args:
+                root: Tk-object, represents the window
+                handle_show_budget_view: reference to method that switches view to the home view
+        """
         self._root = root
         self._handle_show_budget_view = handle_show_budget_view
         self._user = budgetapp_service.current_user()
@@ -59,16 +85,24 @@ class PurchaseView:
         self._initialize()
 
     def pack(self):
+        """Packs the frame
+        """
         self._frame.pack(fill=constants.X)
 
     def destroy(self):
+        """Destroys the frame
+        """
         self._frame.destroy()
 
     def _handle_delete_one(self, purchase_id):
+        """Deletes purchase on button press
+        """
         budgetapp_service.delete_purchase(purchase_id)
         self._initialize_purchase_list()
 
     def _initialize_purchase_list(self):
+        """Initializes the list of purchase-items
+        """
         if self._purchase_list_view:
             self._purchase_list_view.destroy()
 
@@ -82,6 +116,8 @@ class PurchaseView:
         self._purchase_list_view.pack()
 
     def _initialize_header(self):
+        """Initializes the header of the frame
+        """
         label = ttk.Label(
             master=self._frame,
             text=f'Logged in as {self._user.username}'
@@ -110,6 +146,8 @@ class PurchaseView:
         )
 
     def _initialize(self):
+        """Initializes all class components/window features
+        """
         self._frame = ttk.Frame(master=self._root)
         self._purchase_list_frame = ttk.Frame(master=self._frame)
 

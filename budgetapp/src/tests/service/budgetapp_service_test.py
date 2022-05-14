@@ -154,10 +154,11 @@ class TestBudgetappService(unittest.TestCase):
             user.income,
             user.expenses
         )
+
     def test_logout(self):
         self.login_user(self.user_testuser)
         self.budgetapp_service.logout()
-        self.assertEqual(self.budgetapp_service.current_user(),None)
+        self.assertEqual(self.budgetapp_service.current_user(), None)
 
     def test_login_success_with_correct_credentials(self):
         self.budgetapp_service.create_user(
@@ -225,42 +226,44 @@ class TestBudgetappService(unittest.TestCase):
         new_income = 1000
         new_expenses = 500
 
-        self.budgetapp_service.update_user_economy_value('Balance',new_balance)
-        self.budgetapp_service.update_user_economy_value('Income',new_income)
-        self.budgetapp_service.update_user_economy_value('Expenses',new_expenses)
+        self.budgetapp_service.update_user_economy_value(
+            'Balance', new_balance)
+        self.budgetapp_service.update_user_economy_value('Income', new_income)
+        self.budgetapp_service.update_user_economy_value(
+            'Expenses', new_expenses)
 
         updated_user = self.budgetapp_service.fetch_all_users()[0]
 
         self.assertEqual(current.balance, new_balance)
         self.assertEqual(current.income, new_income)
         self.assertEqual(current.expenses, new_expenses)
-        self.assertEqual(str(updated_user.balance),'2000')
-        self.assertEqual(str(updated_user.income),'1000')
-        self.assertEqual(str(updated_user.expenses),'500')
-    
+        self.assertEqual(str(updated_user.balance), '2000')
+        self.assertEqual(str(updated_user.income), '1000')
+        self.assertEqual(str(updated_user.expenses), '500')
+
     def test_create_user_negative_values_raises_error(self):
 
         self.assertRaises(
             NegativeInputError,
-            lambda: self.budgetapp_service.create_user('a','a',-1,1,1))
+            lambda: self.budgetapp_service.create_user('a', 'a', -1, 1, 1))
         self.assertRaises(
             NegativeInputError,
-            lambda: self.budgetapp_service.create_user('a','a',1,-1,1))
+            lambda: self.budgetapp_service.create_user('a', 'a', 1, -1, 1))
         self.assertRaises(
             NegativeInputError,
-            lambda: self.budgetapp_service.create_user('a','a',1,1,-1))
-        
+            lambda: self.budgetapp_service.create_user('a', 'a', 1, 1, -1))
+
     def test_create_negative_budget_raises_error(self):
         self.login_user(self.user_testuser)
         self.assertRaises(
             NegativeInputError,
-            lambda: self.budgetapp_service.create_budget('bad',-100)
+            lambda: self.budgetapp_service.create_budget('bad', -100)
         )
-    
+
     def test_add_negative_purchase_raises_error(self):
         self.assertRaises(
             NegativeInputError,
-            lambda: self.budgetapp_service.add_purchase('1',-123,'nope','')
+            lambda: self.budgetapp_service.add_purchase('1', -123, 'nope', '')
         )
 
     def test_add_purchase_reduces_user_balance_and_budget(self):
@@ -272,7 +275,6 @@ class TestBudgetappService(unittest.TestCase):
         )
         purchase = self.purchase_a
 
-
         self.budgetapp_service.add_purchase(
             budget.id,
             purchase.amount,
@@ -283,12 +285,11 @@ class TestBudgetappService(unittest.TestCase):
         updated_budget = self.budgetapp_service.fetch_user_budgets()[0]
         updated_user = self.budgetapp_service.fetch_all_users()[0]
         all_purchases = self.budgetapp_service.fetch_user_purchases()
-        
-        self.assertEqual(len(all_purchases),1)
-        self.assertEqual(str(current.balance), '990.0')
-        self.assertEqual(str(updated_user.balance),'990.0')
-        self.assertEqual(str(updated_budget.c_amount),'190.0')
 
+        self.assertEqual(len(all_purchases), 1)
+        self.assertEqual(str(current.balance), '990.0')
+        self.assertEqual(str(updated_user.balance), '990.0')
+        self.assertEqual(str(updated_budget.c_amount), '190.0')
 
     def test_delete_purchase_updates_users_balance_and_budget_current_amount(self):
         self.login_user(self.user_testuser)
@@ -311,6 +312,5 @@ class TestBudgetappService(unittest.TestCase):
         updated_user = self.budgetapp_service.fetch_all_users()[0]
 
         self.assertEqual(str(current.balance), '1000.0')
-        self.assertEqual(str(updated_user.balance),'1000.0')
-        self.assertEqual(str(updated_budget.c_amount),'200.0')
-
+        self.assertEqual(str(updated_user.balance), '1000.0')
+        self.assertEqual(str(updated_budget.c_amount), '200.0')

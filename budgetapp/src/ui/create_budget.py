@@ -1,9 +1,17 @@
 from tkinter import ttk, constants, StringVar
-from service.budgetapp_service import budgetapp_service, NegativeInputError
-
+from service.budgetapp_service import budgetapp_service
 
 class CreateBudgetView:
+    """Class of the create budget view
+    """
     def __init__(self, root, handle_show_budget_view):
+        """Class constructor
+
+            Args:
+                root: Tk-object, represents the window
+                handle_show_budget_view: reference to a method for switching the view to the home screen
+
+        """
         self._root = root
         self._handle_show_budget_view = handle_show_budget_view
         self._user = budgetapp_service.current_user()
@@ -18,16 +26,19 @@ class CreateBudgetView:
         self._initialize()
 
     def pack(self):
+        """Packs the frame
+        """
         self._frame.pack(fill=constants.X)
 
     def destroy(self):
+        """Destroys the frame
+        """
         self._frame.destroy()
 
-    def _logout_handler(self):
-        budgetapp_service.logout()
-        self._handle_logout()
-
     def _initialize_budgetname_field(self):
+        """Initializes input field for budget name
+        """
+
         label = ttk.Label(master=self._frame, text='Name of Budget')
         self._budgetname_input = ttk.Entry(master=self._frame)
 
@@ -35,6 +46,8 @@ class CreateBudgetView:
         self._budgetname_input.grid(padx=5, pady=5, sticky=constants.EW)
 
     def _initialize_amount_field(self):
+        """Initializes input field for budget amount
+        """
         label = ttk.Label(master=self._frame, text='Budget amount (€)')
         self._amount_input = ttk.Entry(master=self._frame)
 
@@ -42,7 +55,9 @@ class CreateBudgetView:
         self._amount_input.grid(padx=5, pady=5, sticky=constants.EW)
 
     def _create_budget_handler(self):
-
+        """If the conditions are met, creates Budget after button press
+        """
+        
         budgetname = self._budgetname_input.get()
         amount = self._amount_input.get()
 
@@ -65,13 +80,24 @@ class CreateBudgetView:
         self._handle_show_budget_view()
 
     def _show_error(self, text):
+        """Shows error message
+
+            Args:
+                text: string, the error message
+
+        """
         self._error_variable.set(text)
         self._error_label.grid()
 
     def _hide_error(self):
+        """Hides the error message
+        """
         self._error_label.grid_remove()
 
     def _initialize_header(self):
+        """Inititalizes the header of the window
+        """
+
         label = ttk.Label(
             master=self._frame,
             text=f'Logged in as {self._user.username}'
@@ -92,6 +118,9 @@ class CreateBudgetView:
         )
 
     def _initialize(self):
+        """Initializes all class-components/window features
+        """
+
         self._frame = ttk.Frame(master=self._root)
 
         self._error_variable = StringVar(self._frame)
