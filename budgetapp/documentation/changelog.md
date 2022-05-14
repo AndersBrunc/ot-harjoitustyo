@@ -13,10 +13,9 @@
 - wrote the bulk of the UI code
 
 ## Week 6
-- docstring
-- perhaps make UI more colourful, update fonts etc
-- polishing and more testing
+- wrote docstring
+- polished the overall code and finalized tests
 
 ## Week 7
-- finalize and polish
+- wrote final docstring
 - submit final version
