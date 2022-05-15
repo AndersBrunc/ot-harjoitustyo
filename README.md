@@ -5,19 +5,13 @@ This app can be used to create a budget and keep track of purchases.
 ## Documentation
 
 - [Manual](budgetapp/documentation/kayttoohje.md)
-
 - [Specification of Requirements](budgetapp/documentation/vaatimusmaarittely.md)
-
 - [Architecture](budgetapp/documentation/arkkitehtuuri.md)
-
 - [Testing](budgetapp/documentation/testaus.md)
-
 - [Work accounting](budgetapp/documentation/tuntikirjanpito.md)
-
 - [Changelog](budgetapp/documentation/changelog.md)
 
 - [Release 1](https://github.com/NaND3R5/ot-harjoitustyo/releases/tag/viikko5)
-
 - [Final Release](https://github.com/NaND3R5/ot-harjoitustyo/releases/tag/final)
 
 ## Installation
