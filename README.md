@@ -16,7 +16,9 @@ This app can be used to create a budget and keep track of purchases.
 
 - [Changelog](budgetapp/documentation/changelog.md)
 
-- [Release](https://github.com/NaND3R5/ot-harjoitustyo/releases/tag/viikko5)
+- [Release 1](https://github.com/NaND3R5/ot-harjoitustyo/releases/tag/viikko5)
+
+- [Final submission](https://github.com/NaND3R5/ot-harjoitustyo/releases/tag/final)
 
 ## Installation
 
@@ -58,9 +60,6 @@ poetry run invoke test
 ### Test Coverage
 
 Create a test coverage report to the _htmlcov_-folder using:
-```bash
-poetry run invoke coverage
-```
 ```bash
 poetry run invoke coverage-report
 ```
