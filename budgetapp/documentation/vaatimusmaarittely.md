@@ -20,6 +20,7 @@ The application allows for the user to keep track of how much they can afford to
 - Purchase history can be viewed &check;
 
 ## Possible future extensions
+- Purchases can be added without attachment to a budget
 - Monthly average spending calculated and displayed
 - Previous results can be presented and compared graphically
 - A saving goal can be created
