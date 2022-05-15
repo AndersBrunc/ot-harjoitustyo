@@ -18,7 +18,7 @@ This app can be used to create a budget and keep track of purchases.
 
 - [Release 1](https://github.com/NaND3R5/ot-harjoitustyo/releases/tag/viikko5)
 
-- [Final submission](https://github.com/NaND3R5/ot-harjoitustyo/releases/tag/final)
+- [Final Release](https://github.com/NaND3R5/ot-harjoitustyo/releases/tag/final)
 
 ## Installation
 
