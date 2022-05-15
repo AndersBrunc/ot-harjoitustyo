@@ -18,4 +18,4 @@
 
 ## Week 7
 - wrote final docstring
-- submit final version
+- submitted final version
